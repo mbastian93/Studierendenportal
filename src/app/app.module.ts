@@ -5,6 +5,8 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './/app-routing.module';
 
+import { NewsFeedModule } from './news-feed/news-feed.module';
+
 import {
   MatToolbarModule,
   MatSidenavModule,
@@ -29,7 +31,8 @@ import {
     MatIconModule,
     MatListModule,
     MatButtonModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    NewsFeedModule
   ],
   providers: [],
   bootstrap: [AppComponent]
