@@ -1,0 +1,22 @@
+.page-container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.mat-sidenav-container {
+  flex: 1;
+}
+
+ #page-title {
+   margin: 0 auto;
+   font-size: 30px;
+ }
+
+ .spacer {
+   width: 40px;
+ }
