@@ -2,10 +2,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 
+/* App root */
 import { AppComponent } from './app.component';
-import { AppRoutingModule } from './/app-routing.module';
 
+/* Feature Modules */
+import { CoreModule } from './core/core.module';
 import { NewsFeedModule } from './news-feed/news-feed.module';
+
+/* Routing Module */
+import { AppRoutingModule } from './app-routing.module';
 
 import {
   MatToolbarModule,
@@ -25,6 +30,7 @@ import {
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    CoreModule,
     MatToolbarModule,
     MatSidenavModule,
     MatCardModule,
