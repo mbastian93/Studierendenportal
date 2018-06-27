@@ -1,0 +1,19 @@
+/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
+body {
+  margin: 0;
+  /*font-family: Roboto; */
+}
+
+mat-toolbar {
+  z-index: 2;
+}
+
+mat-icon {
+  padding-right: 16px;
+}
+
+.content-container {
+  text-align: center;
+}
