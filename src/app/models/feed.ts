@@ -1,10 +1,10 @@
 import { FeedDetails } from './feed-details';
-import { FeedItem } from './feedItem';
+import { FeedPost } from './feedPost';
 
 export class Feed {
   feedName: string;
   details: FeedDetails;
-  items: FeedItem[];
+  items: FeedPost[];
   constructor(name: string) {
     this.feedName = name;
     this.items = [];

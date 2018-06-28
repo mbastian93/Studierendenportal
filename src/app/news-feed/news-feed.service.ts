@@ -4,7 +4,7 @@ import {Observable} from 'rxjs';
 import {RSSFeed} from '../models/r-s-s-feed';
 import {Feed} from '../models/feed';
 import {FeedDetails} from '../models/feed-details';
-import {FeedItem} from '../models/feedItem';
+import {FeedPost} from '../models/feedPost';
 
 @Injectable({
   providedIn: 'root'
@@ -73,7 +73,7 @@ export class NewsFeedService {
 
     feedItems.forEach((item) => {
       // parse items from feed
-      const feedItem: FeedItem = new FeedItem();
+      const feedItem: FeedPost = new FeedPost();
       const categories = Array.from(item.getElementsByTagName('category')) as Element[];
       feedItem.title = item.getElementsByTagName('title')[0].firstChild.nodeValue;
       feedItem.description = item.getElementsByTagName('description')[0].firstChild.nodeValue;

@@ -3,7 +3,7 @@ import {NewsFeedService} from '../news-feed.service';
 import {Feed} from '../../models/feed';
 import {MatBottomSheet} from '@angular/material';
 import {NewsFeedSheetComponent} from './news-feed-sheet.component';
-import {FeedItem} from '../../models/feedItem';
+import {FeedPost} from '../../models/feedPost';
 
 @Component({
   selector: 'app-news-feed',
@@ -37,7 +37,7 @@ export class NewsFeedComponent implements OnInit {
   }
 
   // open link directly only on devices without touch
-  openLinkForItem(item: FeedItem) {
+  openLinkForItem(item: FeedPost) {
     if (window.ontouchstart === undefined) {
       window.open(item.link);
     } else {

@@ -1,8 +1,7 @@
-export class FeedItem {
+export class FeedPost {
 
   title: string;
-  description: string;
-  link: string;
+  description: string; link: string;
   author: string;
   guid: string;
   pubDate: string;
