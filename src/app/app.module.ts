@@ -25,6 +25,8 @@ import {
   MatButtonModule,
   MatButtonToggleModule, MatIconRegistry
 } from '@angular/material';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,8 @@ import {
     MatListModule,
     MatButtonModule,
     MatButtonToggleModule,
-    NewsFeedModule
+    NewsFeedModule,
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [NewsFeedService],
   bootstrap: [AppComponent]
