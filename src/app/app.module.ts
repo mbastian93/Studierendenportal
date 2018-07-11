@@ -10,8 +10,10 @@ import {AppComponent} from './app.component';
 /* Feature Modules */
 import {CoreModule} from './core/core.module';
 import {NewsFeedModule} from './news-feed/news-feed.module';
+import {MapModule} from './map/map.module';
 
 import {NewsFeedService} from './news-feed/news-feed.service';
+import { MapService } from './map/map.service';
 
 /* Routing Module */
 import {AppRoutingModule} from './app-routing.module';
@@ -25,12 +27,15 @@ import {
   MatButtonModule,
   MatButtonToggleModule, MatIconRegistry
 } from '@angular/material';
+
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { IndexComponent } from './index/index.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    IndexComponent,
   ],
   imports: [
     HttpClientModule,
@@ -47,9 +52,11 @@ import { environment } from '../environments/environment';
     MatButtonModule,
     MatButtonToggleModule,
     NewsFeedModule,
-    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
+    MapModule,
+    ServiceWorkerModule.register('/Studierendenportal/ngsw-worker.js', { enabled: environment.production })
+    // ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production})
   ],
-  providers: [NewsFeedService],
+  providers: [NewsFeedService, MapService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
@@ -58,6 +65,12 @@ export class AppModule {
       'news',
       sanitizer.bypassSecurityTrustResourceUrl('assets/icons/newspaper.svg'))
       .addSvgIcon('searchPerson',
-        sanitizer.bypassSecurityTrustResourceUrl('assets/icons/account-search-outline.svg'));
+        sanitizer.bypassSecurityTrustResourceUrl('assets/icons/search.svg'))
+      .addSvgIcon('home',
+        sanitizer.bypassSecurityTrustResourceUrl('assets/icons/home.svg'))
+      .addSvgIcon('map',
+        sanitizer.bypassSecurityTrustResourceUrl('assets/icons/map.svg'))
+      .addSvgIcon('bus',
+        sanitizer.bypassSecurityTrustResourceUrl('assets/icons/bus-clock.svg'));
   }
 }

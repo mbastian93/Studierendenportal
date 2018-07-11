@@ -1,7 +1,7 @@
 {
-  "name": "Studierendenportal",
-  "short_name": "Studierendenportal",
-  "theme_color": "#1976d2",
+  "name": "Studierendenportal JGU Mainz",
+  "short_name": "JGU Portal",
+  "theme_color": "#b71c1c",
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "/",

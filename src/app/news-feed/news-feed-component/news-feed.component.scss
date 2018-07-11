@@ -1,0 +1,19 @@
+.output {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.selectForm {
+  width: 200px;
+}
+
+mat-card {
+  width: 350px;
+}
+
+mat-chip-list {
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+}

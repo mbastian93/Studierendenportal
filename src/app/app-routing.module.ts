@@ -1,11 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { NewsFeedComponent } from './news-feed/news-feed/news-feed.component';
+import { NewsFeedComponent } from './news-feed/news-feed-component/news-feed.component';
+import {IndexComponent} from './index/index.component';
+import {MapComponent} from './map/map-component/map.component';
 
 // define the routes
 const routes: Routes = [
-  { path: '', redirectTo: 'Nachrichten', pathMatch: 'full' },
-  { path: 'Nachrichten', component : NewsFeedComponent }
+  { path: '', component: IndexComponent},
+  { path: 'Start', component: IndexComponent },
+  { path: 'Nachrichten', component : NewsFeedComponent },
+  { path: 'Campus-Karte', component: MapComponent }
 ];
 
 @NgModule({

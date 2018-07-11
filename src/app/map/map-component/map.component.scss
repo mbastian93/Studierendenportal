@@ -1,0 +1,33 @@
+.selectForm {
+  width: 400px;
+}
+
+@media screen and (max-width: 425px) {
+  .selectForm {
+    width: 100%;
+  }
+}
+
+#map {
+  padding-top: 10px;
+  height: 60vh;
+}
+
+@media screen and (min-height: 415px) {
+  .output > #map {
+    height: 75vh;
+  }
+}
+
+@media screen and (min-height: 720px) {
+  .output > #map {
+    height: 75vh;
+  }
+}
+
+@media screen and (min-height: 800px) {
+  .output > #map {
+    height: 80vh;
+  }
+}
+

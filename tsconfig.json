@@ -8,7 +8,9 @@
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "target": "es5",
+    // use es5 for dev and es 2015 for prod
+    // "target": "es5",
+    "target": "es2015",
     "typeRoots": [
       "node_modules/@types"
     ],

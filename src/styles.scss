@@ -1,19 +1,78 @@
 /* You can add global styles to this file, and also import other style files */
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500");
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+mat-icon {
+  -webkit-box-sizing: initial;
+  -moz-box-sizing: initial;
+  box-sizing: initial;
+}
 
 body {
   margin: 0;
-  /*font-family: Roboto; */
+  height: 100%;
 }
 
 mat-toolbar {
   z-index: 2;
 }
 
-mat-icon {
-  padding-right: 16px;
+mat-sidenav-content {
+  background-image: url("/assets/img/Header.jpg");
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .content-container {
-  text-align: center;
+  margin: 0 10px;
+}
+
+.selectForm.mat-form-field {
+  display: block;
+  margin: 10px auto 0;
+  background-color: white;
+  padding: 5px;
+  border-radius: 2px;
+}
+// Material-Card styling
+.mat-card-header-text {
+  width: 100%;
+}
+
+mat-card {
+  position: relative;
+  margin: 5px;
+  padding: 24px;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  -ms-word-break: break-all;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  mat-card-header {
+    display: block;
+    h2 {
+      text-align: center;
+    }
+  }
+  mat-card-content {
+    padding-bottom: 5px;
+    text-align: justify;
+  }
+}
+
+mat-card:hover {
+  box-shadow:0 10px 13px -6px rgba(0,0,0,.2),0 20px 31px 3px rgba(0,0,0,.14),0 8px 38px 7px rgba(0,0,0,.12);
+  cursor: pointer;
 }

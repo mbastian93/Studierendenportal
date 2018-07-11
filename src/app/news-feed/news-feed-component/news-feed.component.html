@@ -1,7 +1,7 @@
-<div class="content-container">
-  <mat-form-field>
+<main class="content-container">
+  <mat-form-field class="selectForm">
     <!-- list available sources -->
-    <mat-select name="sourceSelector" id="sourceSelector" placeholder="Quelle auswählen:"
+    <mat-select id="sourceSelector" placeholder="Quelle auswählen:"
                 (selectionChange)="selectHandler($event)">
       <mat-option *ngFor="let feed of this.feeds" [value]="feed">
         {{ feed.feedName }}
@@ -24,4 +24,4 @@
       </mat-chip-list>
     </mat-card>
   </div>
-</div>
+</main>

@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
+import { NgModule, Optional, SkipSelf } from '@angular/core';
 
 import { NewsFeedService } from '../news-feed/news-feed.service';
+import {MapService} from '../map/map.service';
 
 @NgModule({
   imports: [
@@ -9,7 +10,8 @@ import { NewsFeedService } from '../news-feed/news-feed.service';
   ],
   declarations: [],
   providers: [
-    NewsFeedService
+    NewsFeedService,
+    MapService
   ]
 })
 export class CoreModule {

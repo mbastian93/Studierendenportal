@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NewsFeedComponent } from './news-feed/news-feed.component';
+import { NewsFeedComponent,  } from './news-feed-component/news-feed.component';
+import { NewsFeedSheetComponent } from './news-feed-component/news-feed-sheet.component';
 import {
   MatSelectModule,
   MatCardModule,
@@ -9,7 +10,7 @@ import {
   MatListModule,
   MatBottomSheetModule
 } from '@angular/material';
-import { NewsFeedSheetComponent } from './news-feed/news-feed-sheet.component';
+
 
 @NgModule({
   imports: [

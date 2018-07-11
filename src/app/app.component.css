@@ -17,6 +17,16 @@
    font-size: 30px;
  }
 
+@media screen and (max-width: 375px){
+  #page-title {
+    font-size: 20px;
+  }
+}
+
  .spacer {
    width: 40px;
+ }
+
+ .nav-icon {
+   padding-right: 16px;
  }

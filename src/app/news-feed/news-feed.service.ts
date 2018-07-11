@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
+// import models
 import {RSSFeed} from '../models/r-s-s-feed';
 import {Feed} from '../models/feed';
 import {FeedDetails} from '../models/feed-details';
@@ -12,9 +13,10 @@ import {FeedPost} from '../models/feedPost';
 export class NewsFeedService {
 
   // list all sources, must point to RSS feed
+  // remove proxy when using production
   private feedSources: RSSFeed[] = [
-    {name: 'JGU Aktuell', url: 'https://www.uni-mainz.de/32.php'},
-    {name: 'ZDV', url: 'https://www.zdv.uni-mainz.de/feed/'},
+    {name: 'JGU Aktuell', url: 'https://cors-anywhere.herokuapp.com/https://www.uni-mainz.de/32.php'},
+    {name: 'ZDV', url: 'https://cors-anywhere.herokuapp.com/https://www.zdv.uni-mainz.de/feed/'},
   ];
 
   feedsAsJSON: Feed[] = [];
@@ -22,8 +24,9 @@ export class NewsFeedService {
   private DOMParser: DOMParser = new DOMParser();
 
   constructor(
-    private http: HttpClient,
-  ) {  }
+    private http: HttpClient
+  ) {
+  }
 
   // fetch feed from source
   getNewsFromFeed(url: string): Observable<string> {
@@ -32,6 +35,10 @@ export class NewsFeedService {
 
   // fetch news from all feeds listed in feedSources and then parse from XML/RSS to JSON
   getNews() {
+    // return when news already fetched
+    if (this.feedsAsJSON.length > 0) {
+      return;
+    }
     this.feedSources.forEach((source) => {
       this.getNewsFromFeed(source.url).toPromise()
         .then(response => {
@@ -52,7 +59,7 @@ export class NewsFeedService {
     // parse description for Feed
     details.title = docRoot.getElementsByTagName('title')[0].firstChild.nodeValue;
     details.link = docRoot.getElementsByTagName('link')[0].firstChild.nodeValue;
-
+    // check for description and parse
     if (docRoot.getElementsByTagName('description')[0].firstChild) {
       details.description = docRoot.getElementsByTagName('description')[0].firstChild.nodeValue;
     }
@@ -62,7 +69,7 @@ export class NewsFeedService {
       details.copyright = docRoot.getElementsByTagName('copyright')[0].firstChild.nodeValue;
     }
     details.pubDate = docRoot.getElementsByTagName('pubDate')[0].firstChild.nodeValue;
-
+    // check if image exists and if so, parse its details
     if (docRoot.getElementsByTagName('image')[0] && docRoot.getElementsByTagName('image')[0].firstChild) {
       const imgRoot = docRoot.getElementsByTagName('image')[0] as Element;
       details.image.url = imgRoot.getElementsByTagName('url')[0].firstChild.nodeValue;
@@ -79,7 +86,7 @@ export class NewsFeedService {
       feedItem.description = item.getElementsByTagName('description')[0].firstChild.nodeValue;
       feedItem.link = item.getElementsByTagName('link')[0].firstChild.nodeValue;
       // feedItem.author = feedItems[i] as Element).getElementsByTagName('author')[0].firstChild.nodeValue;
-      feedItem.guid = item.getElementsByTagName('guid')[0].firstChild.nodeValue;
+      // feedItem.guid = item.getElementsByTagName('guid')[0].firstChild.nodeValue;
       feedItem.pubDate = item.getElementsByTagName('pubDate')[0].firstChild.nodeValue;
 
       if (categories) {
@@ -97,13 +104,13 @@ export class NewsFeedService {
 
   // sort items of feed by date, newest first
   private sortItems(feed: Feed) {
-      feed.items.sort((left, right): number => {
-        if (Date.parse(left.pubDate) < Date.parse(right.pubDate)) {
-          return 1;
-        } else {
-          return -1;
-        }
-      });
-    }
+    feed.items.sort((left, right): number => {
+      if (Date.parse(left.pubDate) < Date.parse(right.pubDate)) {
+        return 1;
+      } else {
+        return -1;
+      }
+    });
+  }
 }
 

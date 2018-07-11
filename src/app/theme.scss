@@ -4,21 +4,14 @@
 @include mat-core();
 
 $custom-primary: mat-palette($mat-red, 900);
-$custom-accent:  mat-palette($mat-gray, 800);
+$custom-accent: mat-palette($mat-gray, 800);
 
 $custom-theme: mat-light-theme($custom-primary, $custom-accent);
 
 @include angular-material-theme($custom-theme);
 
-h2, h3 {
-  color: mat-color($mat-red, 900) ;
-}
-
-a {
-  color: mat-color($mat-red, 700);
-  :hover {
-    color: mat-color($mat-gray, 900);
-  }
+header, h2, h3 {
+  color: mat-color($mat-red, 900);
 }
 
 .mat-chip .grey {
