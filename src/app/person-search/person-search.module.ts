@@ -1,13 +1,12 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {MapComponent} from './map-component/map.component';
-
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule, Routes} from '@angular/router';
+import {PersonSearchComponent} from './person-search/person-search.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MaterialModule} from '../material/material.module';
 
 const routes: Routes = [
-  {path: '', component: MapComponent}
+  {path: '', component: PersonSearchComponent}
 ];
 
 @NgModule({
@@ -18,7 +17,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     MaterialModule
   ],
-  declarations: [MapComponent]
+  declarations: [PersonSearchComponent]
 })
-export class MapModule {
+export class PersonSearchModule {
 }

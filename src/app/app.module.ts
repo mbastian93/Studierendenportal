@@ -9,28 +9,21 @@ import {AppComponent} from './app.component';
 
 /* Feature Modules */
 import {CoreModule} from './core/core.module';
+import {IndexComponent} from './index/index.component';
 import {NewsFeedModule} from './news-feed/news-feed.module';
 import {MapModule} from './map/map.module';
+import {BusScheduleModule} from './bus-schedule/bus-schedule.module';
+import {MaterialModule} from './material/material.module';
+import {PersonSearchModule} from './person-search/person-search.module';
 
-import {NewsFeedService} from './news-feed/news-feed.service';
-import { MapService } from './map/map.service';
 
 /* Routing Module */
 import {AppRoutingModule} from './app-routing.module';
 
-import {
-  MatToolbarModule,
-  MatSidenavModule,
-  MatIconModule,
-  MatCardModule,
-  MatListModule,
-  MatButtonModule,
-  MatButtonToggleModule, MatIconRegistry
-} from '@angular/material';
+import {MatIconRegistry} from '@angular/material';
 
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
-import { IndexComponent } from './index/index.component';
+import {ServiceWorkerModule} from '@angular/service-worker';
+import {environment} from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -43,26 +36,21 @@ import { IndexComponent } from './index/index.component';
     BrowserAnimationsModule,
     AppRoutingModule,
     CoreModule,
-    MatToolbarModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatCardModule,
-    MatIconModule,
-    MatListModule,
-    MatButtonModule,
-    MatButtonToggleModule,
+    MaterialModule,
     NewsFeedModule,
     MapModule,
-    ServiceWorkerModule.register('/Studierendenportal/ngsw-worker.js', { enabled: environment.production })
+    BusScheduleModule,
+    PersonSearchModule,
+    ServiceWorkerModule.register('/Studierendenportal/ngsw-worker.js', {enabled: environment.production})
     // ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production})
   ],
-  providers: [NewsFeedService, MapService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
-    iconRegistry.addSvgIcon(
-      'news',
+    iconRegistry
+      .addSvgIcon('news',
       sanitizer.bypassSecurityTrustResourceUrl('assets/icons/newspaper.svg'))
       .addSvgIcon('searchPerson',
         sanitizer.bypassSecurityTrustResourceUrl('assets/icons/search.svg'))
@@ -71,6 +59,16 @@ export class AppModule {
       .addSvgIcon('map',
         sanitizer.bypassSecurityTrustResourceUrl('assets/icons/map.svg'))
       .addSvgIcon('bus',
-        sanitizer.bypassSecurityTrustResourceUrl('assets/icons/bus-clock.svg'));
+        sanitizer.bypassSecurityTrustResourceUrl('assets/icons/bus-clock.svg'))
+      .addSvgIcon('email',
+        sanitizer.bypassSecurityTrustResourceUrl('assets/icons/email.svg'))
+      .addSvgIcon('phone',
+        sanitizer.bypassSecurityTrustResourceUrl('assets/icons/phone.svg'))
+      .addSvgIcon('fax',
+        sanitizer.bypassSecurityTrustResourceUrl('assets/icons/fax.svg'))
+      .addSvgIcon('room',
+        sanitizer.bypassSecurityTrustResourceUrl('assets/icons/home-map-marker.svg'))
+      .addSvgIcon('person',
+        sanitizer.bypassSecurityTrustResourceUrl('assets/icons/account.svg'));
   }
 }

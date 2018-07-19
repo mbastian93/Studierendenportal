@@ -4,8 +4,10 @@
   justify-content: center;
 }
 
-.selectForm {
-  width: 200px;
+/deep/ .mat-tab-header {
+  background-color: white;
+  width: fit-content;
+  margin: 5px auto 5px;
 }
 
 mat-card {

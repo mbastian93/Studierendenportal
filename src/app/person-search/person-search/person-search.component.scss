@@ -1,0 +1,58 @@
+table {
+  width: 100%;
+  text-align: left;
+}
+
+.output {
+  text-align: center;
+}
+
+#personForm {
+  text-align: center;
+  margin: 10px auto;
+
+}
+
+.selectForm {
+  display: inline-block;
+  margin: 0 5px;
+}
+
+.orgname {
+  max-width: 250px;
+}
+
+mat-icon {
+  padding-right: 16px;
+  min-width: 24px;
+}
+
+th>mat-icon {
+  vertical-align: bottom;
+  padding-right: 5px;
+}
+
+@media screen and (min-width: 426px) {
+  .mat-expansion-panel-spacing {
+    margin: 16px auto;
+  }
+}
+
+@media screen and (max-width: 425px) {
+
+  mat-expansion-panel {
+    margin: 0;
+  }
+
+  .mat-expansion-panel-spacing {
+    margin: 16px 0;
+  }
+
+  /deep/ .mat-expansion-panel-body {
+    padding: 0 0 16px !important;
+  }
+
+  mat-expansion-panel.mat-expanded {
+    margin: 16px -10px;
+  }
+}

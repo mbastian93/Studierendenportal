@@ -5,12 +5,14 @@ export class FeedDetails {
   language: string;
   copyright: string;
   pubDate: string;
-  image: {
-    url: string;
-    title: string;
-    link: string
-  };
+  image: Image;
   constructor() {
-    this.image = { url: '', title: '', link: ''};
+    this.image = {} as Image;
   }
+}
+
+interface Image {
+  url: string;
+  title: string;
+  link: string;
 }

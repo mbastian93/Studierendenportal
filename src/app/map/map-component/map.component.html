@@ -5,13 +5,19 @@
            [formControl]="ctrl" [matAutocomplete]="auto">
     <mat-autocomplete #auto="matAutocomplete">
       <mat-option *ngFor="let building of filteredBuildings | async" [value]="building.name"
-                  (onSelectionChange)="centerMap(building.coordinate, $event)">
+                  (onSelectionChange)="centerMapAtBuilding(building, $event)">
         {{ building.name }}
         <span *ngIf="building.nickname">({{ building.nickname }})</span>
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
   <div class="output">
-    <div id="map"></div>
+    <div id="map" class="map">
+      <div #popup id="popup">
+        <mat-card id="address" *ngIf="(focusedBuilding !== undefined)" [style.opacity]="showAddress? '1':'0'" >
+          {{ focusedBuilding.defaultAddress }}
+        </mat-card>
+      </div >
+    </div>
   </div>
 </main>

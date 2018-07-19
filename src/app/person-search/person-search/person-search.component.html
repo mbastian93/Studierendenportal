@@ -1,0 +1,106 @@
+<main class="content-container">
+  <form id="personForm">
+    <mat-form-field class="selectForm">
+      <input matInput type="text" name="searchPerson" id="searchPerson" placeholder="Nach Person suchen"
+             ngDefaultControl [(ngModel)]="searchName" (keyup.enter)="searchPerson($event)" aria-label="Name eingeben">
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="searchPerson($event)">Suchen</button>
+  </form>
+  <!-- output person details in table on largeer devices -->
+  <div class="output" *ngIf="!mobile; else smallSize">
+    <table mat-table *ngIf="foundPersons.length > 0;else noResult" [dataSource]="foundPersons"
+           class="mat-elevation-z3 grey">
+      <ng-container matColumnDef="Name">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-icon svgIcon="person" color="primary"></mat-icon>
+          Name
+        </th>
+        <td mat-cell *matCellDef="let person">
+          {{ person.lastname + ', ' + person.firstname }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="Einrichtung">
+        <th class="orgname" mat-header-cell *matHeaderCellDef>
+          <mat-icon svgIcon="home" color="primary"></mat-icon>
+          Einrichtung
+        </th>
+        <td class="orgname" mat-cell *matCellDef="let person">{{ person.orgname }}</td>
+      </ng-container>
+      <ng-container matColumnDef="Raum">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-icon svgIcon="room" color="primary"></mat-icon>
+          Raum
+        </th>
+        <td mat-cell *matCellDef="let person">{{ person.contact.office }}</td>
+      </ng-container>
+      <ng-container matColumnDef="Telefon">
+        <th class="number" mat-header-cell *matHeaderCellDef>
+          <mat-icon svgIcon="phone" color="primary"></mat-icon>
+          Telefon
+        </th>
+        <td class="number" mat-cell *matCellDef="let person">{{ person.contact.tel }}</td>
+      </ng-container>
+      <ng-container matColumnDef="Fax">
+        <th class="number" mat-header-cell *matHeaderCellDef>
+          <mat-icon svgIcon="fax" color="primary"></mat-icon>
+          Fax
+        </th>
+        <td class="number" mat-cell *matCellDef="let person">{{ person.contact.fax }}</td>
+      </ng-container>
+      <ng-container matColumnDef="E-Mail">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-icon svgIcon="email" color="primary"></mat-icon>
+          E-Mail
+        </th>
+        <td mat-cell *matCellDef="let person">{{ person.contact.email }}</td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <ng-template #noResult>
+      Keine Ergebnisse gefunden
+    </ng-template>
+  </div>
+  <!-- Output for smaller devices -->
+  <ng-template #smallSize class="output">
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let person of foundPersons">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{ person.lastname + ', ' + person.firstname }}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-list>
+          <mat-list-item>
+            <mat-icon svgIcon="home" color="primary"></mat-icon>
+            <span class="cdk-visually-hidden">Einrichtung</span>
+            {{ person.orgname }}
+          </mat-list-item>
+          <mat-list-item>
+            <mat-icon svgIcon="room" color="primary"></mat-icon>
+            <span class="cdk-visually-hidden">Raumnummer</span>
+            {{ person.contact.office }}
+          </mat-list-item>
+          <mat-list-item>
+            <mat-icon svgIcon="phone" color="primary"></mat-icon>
+            <span class="cdk-visually-hidden">Telefon</span>
+            {{ person.contact.tel }}
+          </mat-list-item>
+          <mat-list-item>
+            <mat-icon svgIcon="fax" color="primary"></mat-icon>
+            <span class="cdk-visually-hidden">Telefax</span>
+            {{ person.contact.fax }}
+          </mat-list-item>
+          <mat-list-item>
+            <mat-icon svgIcon="email" color="primary"></mat-icon>
+            <span class="cdk-visually-hidden">E-Mail</span>
+            {{ person.contact.email }}
+          </mat-list-item>
+        </mat-list>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <ng-template #noResultMobile>
+      Keine Ergebnisse gefunden
+    </ng-template>
+  </ng-template>
+</main>

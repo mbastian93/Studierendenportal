@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Title} from '@angular/platform-browser';
+import {ToolbarService} from '../toolbar.service';
 
 @Component({
   selector: 'app-index',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IndexComponent implements OnInit {
 
-  constructor() { }
+  private title = 'Studierendenportal';
+  constructor(
+    private titleService: Title,
+    private toolbarService: ToolbarService
+  ) { }
 
   ngOnInit() {
+    this.titleService.setTitle(this.title);
+    this.toolbarService.changeToolbarTitle(this.title);
   }
 
 }

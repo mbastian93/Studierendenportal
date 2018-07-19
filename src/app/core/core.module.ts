@@ -3,6 +3,9 @@ import { NgModule, Optional, SkipSelf } from '@angular/core';
 
 import { NewsFeedService } from '../news-feed/news-feed.service';
 import {MapService} from '../map/map.service';
+import {BusScheduleService} from '../bus-schedule/bus-schedule.service';
+import {ToolbarService} from '../toolbar.service';
+import {PersonSearchService} from '../person-search/person-search.service';
 
 @NgModule({
   imports: [
@@ -10,8 +13,11 @@ import {MapService} from '../map/map.service';
   ],
   declarations: [],
   providers: [
+    ToolbarService,
     NewsFeedService,
-    MapService
+    MapService,
+    BusScheduleService,
+    PersonSearchService
   ]
 })
 export class CoreModule {

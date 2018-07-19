@@ -7,26 +7,25 @@ import {Feed} from '../models/feed';
 import {FeedDetails} from '../models/feed-details';
 import {FeedPost} from '../models/feedPost';
 
+
+// list all sources, must point to RSS feed
+// remove proxy when using production
+const feedSources: RSSFeed[] = [
+  {name: 'JGU Aktuell', url: 'https://cors-anywhere.herokuapp.com/https://www.uni-mainz.de/32.php'},
+  {name: 'ZDV', url: 'https://cors-anywhere.herokuapp.com/https://www.zdv.uni-mainz.de/feed/'},
+];
+
 @Injectable({
   providedIn: 'root'
 })
 export class NewsFeedService {
 
-  // list all sources, must point to RSS feed
-  // remove proxy when using production
-  private feedSources: RSSFeed[] = [
-    {name: 'JGU Aktuell', url: 'https://cors-anywhere.herokuapp.com/https://www.uni-mainz.de/32.php'},
-    {name: 'ZDV', url: 'https://cors-anywhere.herokuapp.com/https://www.zdv.uni-mainz.de/feed/'},
-  ];
-
   feedsAsJSON: Feed[] = [];
-  defaultFeed: Feed;
   private DOMParser: DOMParser = new DOMParser();
 
   constructor(
     private http: HttpClient
-  ) {
-  }
+  ) { }
 
   // fetch feed from source
   getNewsFromFeed(url: string): Observable<string> {
@@ -39,7 +38,7 @@ export class NewsFeedService {
     if (this.feedsAsJSON.length > 0) {
       return;
     }
-    this.feedSources.forEach((source) => {
+    feedSources.forEach((source) => {
       this.getNewsFromFeed(source.url).toPromise()
         .then(response => {
           this.parseFeedFromXmlToJson(response, source.name);

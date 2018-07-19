@@ -1,0 +1,43 @@
+<main class="content-container">
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let station of busStops">
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{station.name}}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <table mat-table *ngIf="station.departureBoard.Departure !== undefined; else noDepartures"
+             [dataSource]="station.departureBoard.Departure" class="mat-elevation-z3">
+
+        <ng-container matColumnDef="Abfahrt (geplant)">
+          <th mat-header-cell *matHeaderCellDef>Zeit</th>
+          <td mat-cell *matCellDef="let departure">
+            {{ departure.date + 'T' + departure.time | date:'HH:mm'}}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="Abfahrt (aktuell)">
+          <th mat-header-cell *matHeaderCellDef>Aktuell</th>
+          <td mat-cell *matCellDef="let departure">
+            <span *ngIf="departure.rtTime;else noDelay">
+              {{ departure.rtDate + 'T' + departure.rtTime | date:'HH:mm'}}
+            </span>
+            <ng-template #noDelay>
+              -
+            </ng-template>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="Linie">
+          <th mat-header-cell *matHeaderCellDef>Linie</th>
+          <td mat-cell *matCellDef="let departure">{{ departure.name }}</td>
+        </ng-container>
+        <ng-container matColumnDef="Richtung">
+          <th mat-header-cell *matHeaderCellDef>Richtung</th>
+          <td mat-cell *matCellDef="let departure" >{{ departure.direction }}</td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <ng-template #noDepartures>
+        Keine Abfahrten
+      </ng-template>
+    </mat-expansion-panel>
+  </mat-accordion>
+</main>

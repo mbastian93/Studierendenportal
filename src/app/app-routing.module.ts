@@ -1,15 +1,17 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { NewsFeedComponent } from './news-feed/news-feed-component/news-feed.component';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 import {IndexComponent} from './index/index.component';
-import {MapComponent} from './map/map-component/map.component';
+
 
 // define the routes
 const routes: Routes = [
-  { path: '', component: IndexComponent},
-  { path: 'Start', component: IndexComponent },
-  { path: 'Nachrichten', component : NewsFeedComponent },
-  { path: 'Campus-Karte', component: MapComponent }
+  {path: '', component: IndexComponent},
+  {path: 'Start', component: IndexComponent},
+  {path: 'Nachrichten', loadChildren: './news-feed/news-feed.module#NewsFeedModule'},
+  {path: 'Campus-Karte', loadChildren: './map/map.module#MapModule'},
+  {path: 'Busfahrpläne', loadChildren: './bus-schedule/bus-schedule.module#BusScheduleModule'},
+  {path: 'Personensuche', loadChildren: './person-search/person-search.module#PersonSearchModule'},
+  {path: '**', component: IndexComponent}
 ];
 
 @NgModule({
@@ -21,4 +23,5 @@ const routes: Routes = [
   ],
   declarations: []
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

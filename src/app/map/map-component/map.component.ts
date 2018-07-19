@@ -1,38 +1,44 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Building} from '../../models/building';
 import {Coordinates} from '../../models/coordinates';
+import {ToolbarService} from '../../toolbar.service';
 import {MapService} from '../map.service';
 import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
+import {Title} from '@angular/platform-browser';
 import {map, startWith} from 'rxjs/operators';
 
+
 // imports for map
-
-// import * as ol from 'openlayers';
-
-import { Map, View, Feature } from 'ol';
+import {Map, View, Overlay, Feature, MapBrowserPointerEvent} from 'ol';
 import OSM from 'ol/source/OSM';
-import Style from 'ol/style/Style';
-import Icon from 'ol/style/Icon';
+import {Icon, Style} from 'ol/style';
 import Point from 'ol/geom/Point';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import TileLayer from 'ol/layer/Tile';
-import {fromLonLat } from 'ol/proj';
+import {fromLonLat} from 'ol/proj';
+import Coordinate from 'ol/coordinate';
 
+import * as ol from 'openlayers';
 
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss']
 })
-export class MapComponent implements OnInit {
+export class MapComponent implements OnInit, AfterViewInit {
 
-  buildings: Building[];
+  private title = 'JGU Portal | Campus-Karte';
+  private buildings: Building[];
   filteredBuildings: Observable<Building[]>;
   ctrl: FormControl = new FormControl();
+  focusedBuilding: Building;
+  showAddress = false;
   private myMap: Map;
-  // define style for marker
+  private popupOverlay: Overlay;
+  @ViewChild('popup') popup: ElementRef;
+  // define style for marker(
   private markerStyle = new Style({
     image: new Icon({
       anchor: [0.5, 46],
@@ -46,13 +52,15 @@ export class MapComponent implements OnInit {
   private markerSource = new VectorSource({});
 
   constructor(
+    private titleService: Title,
+    private toolbarService: ToolbarService,
     private mapService: MapService
   ) {
   }
 
   ngOnInit() {
     this.getBuildings();
-    this.initMap();
+    this.setTitle();
   }
 
   getBuildings() {
@@ -63,13 +71,26 @@ export class MapComponent implements OnInit {
         this.filteredBuildings = this.ctrl.valueChanges
           .pipe(
             startWith(''),
-            map(name => this._filterBuildings(name))
+            map(name => this.filterBuildings(name))
           );
       });
   }
 
-  initMap() {
-    // init map and center ~ at campus
+  private filterBuildings(name: string): Building[] {
+    // only suggest buildings whose name or nickname begins with same substring
+    const filterValue = name.toLowerCase();
+
+    return this.buildings.filter((building) => building.name.toLowerCase().startsWith(filterValue)
+      || (building.nickname && building.nickname.toLowerCase().startsWith(filterValue)));
+  }
+
+  private setTitle() {
+    this.titleService.setTitle(this.title);
+    this.toolbarService.changeToolbarTitle(this.title);
+  }
+
+  ngAfterViewInit() {
+    // init map and ~ center at campus
     this.myMap = new Map({
       layers: [
         new TileLayer({
@@ -85,22 +106,45 @@ export class MapComponent implements OnInit {
         zoom: 16
       })
     });
+    // create overlay for address box and add it to map
+    this.popupOverlay = new Overlay({
+      element: this.popup.nativeElement,
+      positioning: 'bottom-left',
+      stopEvent: false,
+      position: this.myMap.getView().getCenter()
+    });
+    this.myMap.addOverlay(this.popupOverlay as ol.Overlay);
+
+    // hide/show address depending on zoom level
+    this.myMap.getView().on('change:resolution', () => {
+      if (this.myMap.getView().getZoom() < 17) {
+        this.showAddress = false;
+      } else if (this.myMap.getView().getZoom() >= 17) {
+        this.showAddress = true;
+      }
+    });
   }
 
-  centerMap(coordinate: Coordinates, event: any) {
+  centerMapAtBuilding(building: Building, event: any) {
     // return when no location is selected
     if (!event.source.selected) {
       return;
     }
-    // center map at building
-    this.myMap.setView(new View({
-      center: fromLonLat([coordinate.longitude, coordinate.latitude], 'EPSG:3857'),
-      zoom: 19
-    }));
+    this.showAddress = true;
+    this.focusedBuilding = building;
+    const coordinates: Coordinates = building.coordinate;
+    // update view and center map at building
+    this.myMap.getView().setCenter(fromLonLat([coordinates.longitude, coordinates.latitude], 'EPSG:3857'));
+    this.myMap.getView().setZoom(19);
 
-    // create new marker for building
+    // position adress box on the right side of the map's center
+    const newCoordinates: Coordinate = this.myMap.getView().getCenter();
+    newCoordinates[0] += 15;
+    this.popupOverlay.setPosition(newCoordinates as ol.Coordinate);
+    // create new marker for building and define style
     const iconFeature = new Feature({
-      geometry: new Point(fromLonLat([coordinate.longitude, coordinate.latitude], 'EPSG:3857'))
+      geometry: new Point(fromLonLat([coordinates.longitude, coordinates.latitude], 'EPSG:3857')),
+      name: building.defaultAddress
     });
     iconFeature.setStyle(this.markerStyle);
     // clear layer and add new Marker
@@ -108,13 +152,6 @@ export class MapComponent implements OnInit {
     this.markerSource.addFeature(iconFeature);
   }
 
-  private _filterBuildings(name: string): Building[] {
-    // only suggest buildings whose name or nickname begins with same substring
-    const filterValue = name.toLowerCase();
-
-    return this.buildings.filter((building) => building.name.toLowerCase().startsWith(filterValue)
-      || (building.nickname && building.nickname.toLowerCase().startsWith(filterValue)));
-  }
 
 }
 

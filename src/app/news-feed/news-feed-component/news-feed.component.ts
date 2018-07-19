@@ -4,6 +4,8 @@ import {Feed} from '../../models/feed';
 import {MatBottomSheet} from '@angular/material';
 import {NewsFeedSheetComponent} from './news-feed-sheet.component';
 import {FeedPost} from '../../models/feedPost';
+import {Title} from '@angular/platform-browser';
+import {ToolbarService} from '../../toolbar.service';
 
 @Component({
   selector: 'app-news-feed',
@@ -12,10 +14,12 @@ import {FeedPost} from '../../models/feedPost';
 })
 export class NewsFeedComponent implements OnInit {
 
-  activeSource: Feed;
+  private title = 'JGU Portal | Nachrichten';
   feeds: Feed[];
 
   constructor(
+    private titleService: Title,
+    private toolbarService: ToolbarService,
     private feedService: NewsFeedService,
     private bottomSheet: MatBottomSheet
   ) {
@@ -23,17 +27,12 @@ export class NewsFeedComponent implements OnInit {
 
   ngOnInit() {
     this.getFeeds();
+    this.setTitle();
   }
 
   getFeeds() {
     this.feedService.getNews();
     this.feeds = this.feedService.feedsAsJSON;
-    this.activeSource = this.feedService.defaultFeed;
-  }
-
-  // switch source for feed when selected
-  selectHandler(event: any) {
-    this.activeSource = event.value;
   }
 
   // open link directly only on devices without touch
@@ -45,4 +44,8 @@ export class NewsFeedComponent implements OnInit {
     }
   }
 
+  private setTitle() {
+    this.titleService.setTitle(this.title);
+    this.toolbarService.changeToolbarTitle(this.title);
+  }
 }

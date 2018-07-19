@@ -1,0 +1,101 @@
+[
+  {
+    "id": 3029150,
+    "name": "Johannes-von-Müller-Weg",
+    "coord": {
+      "longitude": 8.24545026730643,
+      "latitude": 49.9930620258257
+    },
+    "departureBoard": {}
+  },
+  {
+    "id": 3029149,
+    "name": "Colonel-Kleinmann-Weg",
+    "coord": {
+      "longitude": 8.24248265781983,
+      "latitude": 49.99199077154
+    },
+    "departureBoard": {}
+  },
+  {
+    "id": 3029148,
+    "name": "Hanns-Dieter-Hüsch-Weg",
+    "coord": {
+      "longitude": 8.23917484750873,
+      "latitude": 49.9912768331543
+    },
+    "departureBoard": {}
+  },
+  {
+    "id": 3025994,
+    "name": "Staudingerweg",
+    "coord": {
+      "longitude": 8.23586887371477,
+      "latitude": 49.9895738447423
+    },
+    "departureBoard": {}
+  },
+  {
+    "id": 3025995,
+    "name": "Duesbergweg",
+    "coord": {
+      "longitude": 8.23261624331645,
+      "latitude": 49.988914025953
+    },
+    "departureBoard": {}
+  },
+  {
+    "id": 3029193,
+    "name": "Hochschule Mainz",
+    "coord": {
+      "longitude": 8.2288490891937,
+      "latitude": 49.9890418687091
+    },
+    "departureBoard": {}
+  },
+  {
+    "id": 3029250,
+    "name": "Koblenzer Str./HDI-Gerling",
+    "coord": {
+      "longitude": 8.22730020536119,
+      "latitude": 49.9925828485934
+    },
+    "departureBoard": {}
+  },
+  {
+    "id": 3029153,
+    "name": "Plaza",
+    "coord": {
+      "longitude": 8.22500945239986,
+      "latitude": 49.9893399264085
+    },
+    "departureBoard": {}
+  },
+  {
+    "id": 3025982,
+    "name": "Kisselberg/Coface Deutschland",
+    "coord": {
+      "longitude": 8.22535174535642,
+      "latitude": 49.9923360894854
+    },
+    "departureBoard": {}
+  },
+  {
+    "id": 3025307,
+    "name": "Friedrich-von-Pfeiffer-Weg",
+    "coord": {
+      "longitude": 8.23586289161454,
+      "latitude": 49.9943478198172
+    },
+    "departureBoard": {}
+  },
+  {
+    "id": 3025547,
+    "name": "Universität",
+    "coord": {
+      "longitude": 8.24719887552109,
+      "latitude": 49.997182098987
+    },
+    "departureBoard": {}
+  }
+]

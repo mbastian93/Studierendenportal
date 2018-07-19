@@ -2,7 +2,7 @@
 <div class="page-container">
   <!-- toolbar with heading -->
   <mat-toolbar color="primary" class="mat-elevation-z3">
-    <button mat-icon-button (click)="snav.toggle()">
+    <button mat-icon-button (click)="snav.toggle()" aria-label="Menü öffnen">
       <mat-icon>menu</mat-icon>
     </button>
     <h1 id="page-title">{{title}}</h1>
@@ -18,22 +18,22 @@
           Start
         </a>
         <mat-divider></mat-divider>
-        <a mat-list-item routerLink="/Nachrichten">
+        <a mat-list-item routerLink="/Nachrichten/">
           <mat-icon svgIcon="news" color="primary" class="nav-icon"></mat-icon>
           Nachrichten
         </a>
         <mat-divider></mat-divider>
-        <a mat-list-item routerLink="/Campus-Karte">
+        <a mat-list-item routerLink="/Campus-Karte/">
           <mat-icon svgIcon="map" color="primary" class="nav-icon"></mat-icon>
           Campus-Karte
         </a>
         <mat-divider></mat-divider>
-        <a mat-list-item routerLink="/Busfahrpläne">
+        <a mat-list-item routerLink="/Busfahrpläne/">
           <mat-icon svgIcon="bus" color="primary" class="nav-icon"></mat-icon>
           Busfahrpläne
         </a>
         <mat-divider></mat-divider>
-        <a mat-list-item routerLink="/Personensuche">
+        <a mat-list-item routerLink="/Personensuche/">
           <mat-icon svgIcon="searchPerson" color="primary" class="nav-icon"></mat-icon>
           Personensuche
         </a>
