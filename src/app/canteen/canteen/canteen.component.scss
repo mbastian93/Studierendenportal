@@ -1,0 +1,52 @@
+.output {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+mat-card {
+  width: 350px;
+  cursor: initial;
+}
+
+mat-card-footer {
+  position: absolute;
+  right: 25px;
+  bottom: 30px;
+
+}
+
+.mat-chip-list-wrapper {
+  flex-wrap: wrap-reverse;
+}
+
+mat-chip-list {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+}
+
+/deep/.green.mat-chip {
+  background-color: #aed581;
+}
+
+/deep/.red.mat-chip {
+  background-color: red;
+}
+
+.selectForm {
+  margin: 10px 5px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.mat-tab-labels {
+  background-color: #fff;
+}
+/deep/ .mat-tab-header {
+  background-color: white;
+}
+
+/deep/.mat-tab-header-pagination {
+  background-color: #fff;
+}
+

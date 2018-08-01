@@ -1,0 +1,42 @@
+<main class="content-container">
+  <ng-container *ngIf="canteens.length > 0; else spinner">
+    <mat-tab-group (selectedTabChange)="setActiveCanteen($event)">
+      <mat-tab *ngFor="let canteen of canteens" label="{{ canteen.name }}">
+        <mat-form-field class="selectForm mat-elevation-z3">
+          <mat-select placeholder="Tag auswählen" [(ngModel)]="today">
+            <mat-option *ngFor="let day of canteen.days" [value]="day" (onSelectionChange)="handleSelect($event)">
+              {{ day }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div class="output" *ngIf="todaysMeals">
+          <mat-card *ngFor="let meal of todaysMeals">
+            <mat-card-header>
+              <mat-card-title>
+                <h3>{{ meal.counter }}</h3>
+              </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              {{ meal.description }}
+              <br>
+              <br>
+              <div *ngIf="meal.hints">
+                Nährwertangaben: {{ meal.hints }}
+              </div>
+              <mat-chip-list [selectable]="false">
+                <mat-chip class="grey">
+                  {{ meal.priceStudents |currency: '€' }} / {{meal.priceEmployees | currency: '€' }}
+                </mat-chip>
+                <mat-chip class="green" *ngIf="meal.vegan">{{ meal.vegan }}</mat-chip>
+                <mat-chip class="red" *ngIf="meal.soldOut">{{ meal.soldOut }}</mat-chip>
+              </mat-chip-list>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </ng-container>
+  <ng-template #spinner>
+    <mat-spinner></mat-spinner>
+  </ng-template>
+</main>
