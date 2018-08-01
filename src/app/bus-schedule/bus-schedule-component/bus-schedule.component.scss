@@ -1,6 +1,11 @@
 mat-expansion-panel {
   max-width: 700px;
-  margin: 0 auto;
+}
+
+@media screen and (min-width: 748px){
+  mat-expansion-panel {
+    margin: 0 auto;
+  }
 }
 
 table {
@@ -9,19 +14,11 @@ table {
 
 @media screen and (min-width: 426px) {
   .mat-expansion-panel-spacing {
-    margin: 16px auto;
+    margin: 16px auto!important;
   }
 }
 
 @media screen and (max-width: 425px) {
-
-  mat-expansion-panel {
-    margin: 0;
-  }
-
-  .mat-expansion-panel-spacing {
-    margin: 16px 0px;
-  }
 
   /deep/ .mat-expansion-panel-body {
     padding: 0 0 16px !important;
@@ -35,7 +32,4 @@ table {
     max-width: 100px;
   }
 
-  mat-expansion-panel.mat-expanded {
-    margin: 16px -10px;
-  }
 }
