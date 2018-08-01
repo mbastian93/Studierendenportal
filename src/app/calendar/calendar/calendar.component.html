@@ -1,0 +1,37 @@
+<main class="content-container">
+  <div class="output" *ngIf="events.length > 0; else spinner">
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let event of events" expandedHeight="auto">
+        <mat-expansion-panel-header collapsedHeight="auto" expandedHeight="auto">
+          <mat-panel-title [ngClass]="panelOpenState? 'expanded' : 'collapsed' ">
+            <span class="date">{{ event.startDate | date: 'dd.MM' }}</span> {{ event.title }}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-list>
+          <mat-list-item>
+            <mat-icon svgIcon="clock" color="primary"></mat-icon>
+            {{ event.startDate + 'T' + event.startTime | date: 'H:mm'}} -
+            {{event.endDate + 'T' + event.endTime | date:'H:mm' }}
+          </mat-list-item>
+          <mat-list-item>
+            <mat-icon svgIcon="marker" color="primary"></mat-icon>
+            {{ event.location.name }}, {{ event.location.address }}
+          </mat-list-item>
+          <mat-list-item>
+            <mat-icon svgIcon="info" color="primary"></mat-icon>
+            {{ event.description }}
+          </mat-list-item>
+          <mat-list-item>
+            <mat-icon svgIcon="person" color="primary"></mat-icon>
+            <a routerLink="/Personensuche/{{ event.person.key }}">
+              Kontakt
+            </a>
+          </mat-list-item>
+        </mat-list>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+  <ng-template #spinner>
+    <mat-spinner></mat-spinner>
+  </ng-template>
+</main>

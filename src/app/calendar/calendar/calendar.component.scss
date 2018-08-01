@@ -1,0 +1,37 @@
+.date {
+  padding-right: 10px;
+}
+
+.mat-expansion-panel {
+  padding: 10px 0;
+}
+
+mat-list-item.mat-list-item {
+  height: auto;
+  padding: 10px 0;
+  white-space: pre-line;
+}
+
+mat-expansion-panel {
+  max-width: 700px;
+}
+
+@media screen and (min-width: 748px){
+  mat-expansion-panel {
+    margin: 0 auto;
+  }
+}
+
+@media screen and (min-width: 426px) {
+  .mat-expansion-panel-spacing {
+     margin: 16px auto;
+  }
+}
+
+@media screen  and (max-width: 425px){
+  /deep/ .mat-expansion-panel-body {
+    padding: 0 0 16px !important;
+  }
+}
+
+
