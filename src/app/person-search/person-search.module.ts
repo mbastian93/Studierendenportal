@@ -6,7 +6,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MaterialModule} from '../material/material.module';
 
 const routes: Routes = [
-  {path: '', component: PersonSearchComponent}
+  {path: '', component: PersonSearchComponent},
+  {path: ':id', component: PersonSearchComponent}
 ];
 
 @NgModule({
