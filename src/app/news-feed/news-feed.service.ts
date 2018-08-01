@@ -10,9 +10,11 @@ import {FeedPost} from '../models/feedPost';
 
 // list all sources, must point to RSS feed
 // remove proxy when using production
+const proxy = 'https://cors-anywhere.herokuapp.com/';
+// const proxy = 'https://crossorigin.me/';
 const feedSources: RSSFeed[] = [
-  {name: 'JGU Aktuell', url: 'https://cors-anywhere.herokuapp.com/https://www.uni-mainz.de/32.php'},
-  {name: 'ZDV', url: 'https://cors-anywhere.herokuapp.com/https://www.zdv.uni-mainz.de/feed/'},
+  {name: 'JGU Aktuell', url: 'https://www.uni-mainz.de/32.php'},
+  {name: 'ZDV', url: 'https://www.zdv.uni-mainz.de/feed/'},
 ];
 
 @Injectable({
@@ -29,7 +31,7 @@ export class NewsFeedService {
 
   // fetch feed from source
   getNewsFromFeed(url: string): Observable<string> {
-    return this.http.get(url, {responseType: 'text'});
+    return this.http.get(proxy + url, {responseType: 'text'});
   }
 
   // fetch news from all feeds listed in feedSources and then parse from XML/RSS to JSON
@@ -59,22 +61,17 @@ export class NewsFeedService {
     details.title = docRoot.getElementsByTagName('title')[0].firstChild.nodeValue;
     details.link = docRoot.getElementsByTagName('link')[0].firstChild.nodeValue;
     // check for description and parse
-    if (docRoot.getElementsByTagName('description')[0].firstChild) {
-      details.description = docRoot.getElementsByTagName('description')[0].firstChild.nodeValue;
+    let description;
+    if ((description = docRoot.getElementsByTagName('description')).length > 0 && description.firstChild) {
+      details.description = description[0].firstChild.nodeValue;
     }
     details.language = docRoot.getElementsByTagName('language')[0].firstChild.nodeValue;
 
-    if (docRoot.getElementsByTagName('copyright')[0] && docRoot.getElementsByTagName('copyright')[0].firstChild) {
-      details.copyright = docRoot.getElementsByTagName('copyright')[0].firstChild.nodeValue;
+    let copyright;
+    if ((copyright = docRoot.getElementsByTagName('copyright')).length) {
+      details.copyright = copyright[0].firstChild.nodeValue;
     }
     details.pubDate = docRoot.getElementsByTagName('pubDate')[0].firstChild.nodeValue;
-    // check if image exists and if so, parse its details
-    if (docRoot.getElementsByTagName('image')[0] && docRoot.getElementsByTagName('image')[0].firstChild) {
-      const imgRoot = docRoot.getElementsByTagName('image')[0] as Element;
-      details.image.url = imgRoot.getElementsByTagName('url')[0].firstChild.nodeValue;
-      details.image.title = imgRoot.getElementsByTagName('title')[0].firstChild.nodeValue;
-      details.image.link = imgRoot.getElementsByTagName('link')[0].firstChild.nodeValue;
-    }
     feedAsJson.details = details;
 
     feedItems.forEach((item) => {
