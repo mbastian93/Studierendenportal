@@ -1,5 +1,5 @@
 <main class="content-container">
-  <mat-tab-group>
+  <mat-tab-group *ngIf="feeds.length > 0; else spinner">
     <mat-tab *ngFor="let feed of feeds" label="{{feed.feedName}}">
       <div class="output">
         <mat-card *ngFor="let item of feed.items" (click)="openLinkForItem(item)" class="mat-elevation-z3">
@@ -10,13 +10,18 @@
             <mat-card-subtitle>{{item.pubDate | date: 'dd.MM.yyyy' }}</mat-card-subtitle>
           </mat-card-header>
           <mat-card-content [innerHtml]="item.description"></mat-card-content>
-          <mat-chip-list *ngIf="item.categories.length > 0">
-            <mat-chip class="grey" *ngFor="let category of item.categories">
-              {{ category }}
-            </mat-chip>
-          </mat-chip-list>
+          <mat-card-footer>
+            <mat-chip-list *ngIf="item.categories.length > 0" [selectable]="false" >
+              <mat-chip class="grey" *ngFor="let category of item.categories">
+                {{ category }}
+              </mat-chip>
+            </mat-chip-list>
+          </mat-card-footer>
         </mat-card>
       </div>
     </mat-tab>
   </mat-tab-group>
+  <ng-template #spinner>
+    <mat-spinner></mat-spinner>
+  </ng-template>
 </main>
