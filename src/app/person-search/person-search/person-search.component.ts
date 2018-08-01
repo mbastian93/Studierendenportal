@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Title} from '@angular/platform-browser';
 import {ToolbarService} from '../../toolbar.service';
 import {PersonSearchService} from '../person-search.service';
 import {Person} from '../../models/person';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-person-search',
@@ -18,16 +19,24 @@ export class PersonSearchComponent implements OnInit {
   private lastSearch = '';
   mobile: boolean;
 
+  @Input() id: string;
+
   constructor(
     private titleService: Title,
     private toolbarService: ToolbarService,
     private personSearchService: PersonSearchService,
+    private route: ActivatedRoute,
   ) {
   }
 
   ngOnInit() {
     this.setTitle();
-    this.foundPersons = this.personSearchService.foundPersons;
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.getPerson(id);
+    } else {
+      this.foundPersons = this.personSearchService.foundPersons;
+    }
     // display output as table on large enough screen
     this.mobile = window.screen.width <= 768;
   }
@@ -35,7 +44,7 @@ export class PersonSearchComponent implements OnInit {
   private setTitle() {
     // change title of toolbar and window
     this.titleService.setTitle(this.title);
-    this.toolbarService.changeToolbarTitle(this.title);
+    this.toolbarService.setToolbarTitle(this.title);
   }
 
   searchPerson(event: Event) {
@@ -51,6 +60,11 @@ export class PersonSearchComponent implements OnInit {
     this.foundPersons.length = this.personSearchService.foundPersons.length = 0;
     // replace umlauts and other special characters before searching
     this.personSearchService.findPersons(escape(this.searchName));
+  }
+
+  getPerson(id: string) {
+    this.personSearchService.getPerson(id);
+    this.foundPersons = this.personSearchService.foundPersons;
   }
 
 }
