@@ -6,6 +6,7 @@ import {MapService} from '../map/map.service';
 import {BusScheduleService} from '../bus-schedule/bus-schedule.service';
 import {ToolbarService} from '../toolbar.service';
 import {PersonSearchService} from '../person-search/person-search.service';
+import {CalendarService} from '../calendar/calendar.service';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import {PersonSearchService} from '../person-search/person-search.service';
     NewsFeedService,
     MapService,
     BusScheduleService,
-    PersonSearchService
+    PersonSearchService,
+    CalendarService
   ]
 })
 export class CoreModule {
