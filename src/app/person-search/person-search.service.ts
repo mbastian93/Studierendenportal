@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Person} from '../models/person';
 
 
 const proxy = 'https://cors-anywhere.herokuapp.com/';
 const url = 'https://univis.uni-mainz.de/prg?search=persons&show=xml';
+const personUrl = 'https://univis.uni-mainz.de/prg?show=xml&key=741/persons/2017w:';
 
 @Injectable({
   providedIn: 'root'
@@ -13,25 +14,42 @@ export class PersonSearchService {
 
   foundPersons: Person[] = [];
   private domParser: DOMParser = new DOMParser();
+
   constructor(
     private http: HttpClient,
-  ) { }
+  ) {
+  }
 
   findPersons(name: string) {
     // find person whose name is or begins with '$name'
     this.http.get(proxy + url + '&fullname=' + name, {responseType: 'text'})
       .toPromise()
-      .then( response => {
+      .then(response => {
+        this.parsePersonsFromXmlToJson(response);
+      });
+  }
+
+  // search for person by ID
+  getPerson(id: string) {
+    // replace all '.' in ID with '/'
+    const ref = id.replace('Person.', '').split('.').join('/');
+    this.http.get(proxy + personUrl + ref, {responseType: 'text'})
+      .toPromise()
+      .then(response => {
         this.parsePersonsFromXmlToJson(response);
       });
   }
 
   private parsePersonsFromXmlToJson(response: string) {
-    const personsAsXml = Array.from(this.domParser.parseFromString(response, 'text/xml').getElementsByTagName('Person')) as Element[];
+    const personsAsXml = Array.from(this.domParser.parseFromString(response, 'text/xml')
+      .getElementsByTagName('Person')) as Element[];
     // return when response doesn't contain any results
-    if (personsAsXml.length === 0) { return; }
+    if (personsAsXml.length === 0) {
+      return;
+    }
     personsAsXml.forEach(personAsXml => {
-      const person = new Person();
+      const key = personAsXml.getAttribute('key');
+      const person = new Person(key);
       let firstname;
       if ((firstname = personAsXml.getElementsByTagName('firstname')).length > 0) {
         person.firstname = firstname[0].firstChild.nodeValue;
