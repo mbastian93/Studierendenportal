@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
+import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
 import {IndexComponent} from './index/index.component';
 
 
@@ -11,12 +11,14 @@ const routes: Routes = [
   {path: 'Campus-Karte', loadChildren: './map/map.module#MapModule'},
   {path: 'Busfahrpläne', loadChildren: './bus-schedule/bus-schedule.module#BusScheduleModule'},
   {path: 'Personensuche', loadChildren: './person-search/person-search.module#PersonSearchModule'},
+  {path: 'Veranstaltungen', loadChildren: './calendar/calendar.module#CalendarModule'},
+  {path: 'Mensa', loadChildren: './canteen/canteen.module#CanteenModule'},
   {path: '**', component: IndexComponent}
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules})
   ],
   exports: [
     RouterModule
