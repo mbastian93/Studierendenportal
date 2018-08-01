@@ -17,11 +17,13 @@ import {AppRoutingModule} from './app-routing.module';
 import {MatIconRegistry} from '@angular/material';
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {environment} from '../environments/environment';
+import { WeatherComponent } from './weather-component/weather.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     IndexComponent,
+    WeatherComponent,
   ],
   imports: [
     HttpClientModule,
@@ -70,6 +72,8 @@ export class AppModule {
       .addSvgIcon('marker',
         sanitizer.bypassSecurityTrustResourceUrl('assets/icons/map-marker.svg'))
       .addSvgIcon('meal',
-        sanitizer.bypassSecurityTrustResourceUrl('assets/icons/food-fork-drink.svg'));
+        sanitizer.bypassSecurityTrustResourceUrl('assets/icons/food-fork-drink.svg'))
+      .addSvgIcon('weather',
+        sanitizer.bypassSecurityTrustResourceUrl('assets/icons/weather-partlycloudy'));
   }
 }
