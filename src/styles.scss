@@ -12,6 +12,8 @@ mat-icon {
   -webkit-box-sizing: initial;
   -moz-box-sizing: initial;
   box-sizing: initial;
+  padding-right: 16px;
+  min-width: 24px;
 }
 
 body {
@@ -24,19 +26,20 @@ mat-toolbar {
 }
 
 mat-sidenav-content {
-//  background-attachment: fixed;
-//  background-position: center;
-//  background-repeat: no-repeat;
-//  background-size: cover;
+  background-image: url('/assets/img/Header.jpg');
+  background-attachment: fixed;
+  background-position-x: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .content-container {
-  margin: 0 10px;
+  margin: 10px 10px;
 }
 
 .selectForm.mat-form-field {
   display: block;
-  margin: 10px auto 0;
+  margin: 0 auto 0;
   background-color: white;
   padding: 5px;
   border-radius: 2px;
@@ -80,8 +83,39 @@ mat-card:hover {
   width: 400px;
 }
 
+
 @media screen and (max-width: 425px) {
+
   .selectForm {
     width: 100%;
   }
+
+  mat-expansion-panel {
+    margin: 0;
+  }
+
+  .mat-expansion-panel-spacing {
+    margin: 16px 0px;
+  }
+
+  mat-expansion-panel.mat-expanded {
+    margin: 16px -10px;
+  }
+}
+
+mat-spinner {
+  margin: 20% auto;
+}
+
+.mat-tab-labels {
+  background-color: #fff;
+  display: flex;
+  margin: 0 auto;
+  width: fit-content;
+  box-shadow:0 3px 3px -2px rgba(0,0,0,.2),0 3px 4px 0 rgba(0,0,0,.14),0 1px 8px 0 rgba(0,0,0,.12)
+}
+
+.mat-tab-header {
+  background-color: transparent!important;
+  border-bottom: none!important;
 }
