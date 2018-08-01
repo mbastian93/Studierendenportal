@@ -6,7 +6,7 @@ import {
   MatCardModule, MatChipsModule, MatDividerModule,
   MatExpansionModule, MatIconModule,
   MatInputModule,
-  MatListModule, MatSelectModule, MatSidenavModule,
+  MatListModule, MatProgressSpinnerModule, MatSelectModule, MatSidenavModule,
   MatTableModule, MatTabsModule, MatToolbarModule
 } from '@angular/material';
 
@@ -27,7 +27,8 @@ import {
     MatIconModule,
     MatToolbarModule,
     MatDividerModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     MatListModule,
@@ -44,7 +45,8 @@ import {
     MatIconModule,
     MatToolbarModule,
     MatDividerModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatProgressSpinnerModule
   ],
   declarations: []
 })
