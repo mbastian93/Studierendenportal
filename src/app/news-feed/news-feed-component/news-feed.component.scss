@@ -4,18 +4,28 @@
   justify-content: center;
 }
 
-/deep/ .mat-tab-header {
-  background-color: white;
-  width: fit-content;
-  margin: 5px auto 5px;
-}
-
 mat-card {
   width: 350px;
 }
 
-mat-chip-list {
+mat-card-footer {
   position: absolute;
-  bottom: 5px;
-  left: 5px;
+  right: 25px;
+  bottom: 30px;
+  max-width: 350px;
+}
+
+/deep/.mat-chip-list-wrapper {
+  flex-direction: row-reverse !important;
+  flex-wrap: wrap-reverse !important;
+}
+.mat-tab-labels {
+
+}
+/deep/ .mat-tab-header {
+  background-color: white;
+}
+
+/deep/.mat-tab-header-pagination {
+  background-color: #fff;
 }
