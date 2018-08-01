@@ -46,6 +46,6 @@ export class NewsFeedComponent implements OnInit {
 
   private setTitle() {
     this.titleService.setTitle(this.title);
-    this.toolbarService.changeToolbarTitle(this.title);
+    this.toolbarService.setToolbarTitle(this.title);
   }
 }

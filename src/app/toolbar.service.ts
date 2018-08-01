@@ -9,7 +9,7 @@ export class ToolbarService {
   constructor() {
   }
 
-  changeToolbarTitle(title: string) {
+  setToolbarTitle(title: string) {
     this.fire.emit(title);
   }
 

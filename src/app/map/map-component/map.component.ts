@@ -6,6 +6,7 @@ import {MapService} from '../map.service';
 import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {Title} from '@angular/platform-browser';
+import {MatOptionSelectionChange} from '@angular/material';
 import {map, startWith} from 'rxjs/operators';
 
 
@@ -63,7 +64,7 @@ export class MapComponent implements OnInit, AfterViewInit {
     this.setTitle();
   }
 
-  getBuildings() {
+  private getBuildings() {
     this.mapService.getBuildingsList()
       .subscribe(res => {
         this.buildings = res;
@@ -71,7 +72,7 @@ export class MapComponent implements OnInit, AfterViewInit {
         this.filteredBuildings = this.ctrl.valueChanges
           .pipe(
             startWith(''),
-            map(name => this.filterBuildings(name))
+            map(buildingName => this.filterBuildings(buildingName))
           );
       });
   }
@@ -86,7 +87,7 @@ export class MapComponent implements OnInit, AfterViewInit {
 
   private setTitle() {
     this.titleService.setTitle(this.title);
-    this.toolbarService.changeToolbarTitle(this.title);
+    this.toolbarService.setToolbarTitle(this.title);
   }
 
   ngAfterViewInit() {
@@ -125,26 +126,26 @@ export class MapComponent implements OnInit, AfterViewInit {
     });
   }
 
-  centerMapAtBuilding(building: Building, event: any) {
+  centerMapAtBuilding(building: Building, event: MatOptionSelectionChange ) {
     // return when no location is selected
     if (!event.source.selected) {
       return;
     }
     this.showAddress = true;
     this.focusedBuilding = building;
-    const coordinates: Coordinates = building.coordinate;
+    const coordinates: Coordinates = this.focusedBuilding.coordinate;
     // update view and center map at building
     this.myMap.getView().setCenter(fromLonLat([coordinates.longitude, coordinates.latitude], 'EPSG:3857'));
     this.myMap.getView().setZoom(19);
 
-    // position adress box on the right side of the map's center
+    // position address box on the right side of the map's center
     const newCoordinates: Coordinate = this.myMap.getView().getCenter();
     newCoordinates[0] += 15;
     this.popupOverlay.setPosition(newCoordinates as ol.Coordinate);
     // create new marker for building and define style
     const iconFeature = new Feature({
       geometry: new Point(fromLonLat([coordinates.longitude, coordinates.latitude], 'EPSG:3857')),
-      name: building.defaultAddress
+      name: this.focusedBuilding.defaultAddress
     });
     iconFeature.setStyle(this.markerStyle);
     // clear layer and add new Marker
