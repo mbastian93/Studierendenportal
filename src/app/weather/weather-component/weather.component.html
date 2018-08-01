@@ -1,0 +1,35 @@
+<main class="content-container">
+    <mat-card *ngIf="weather; else spinner">
+      <mat-card-content>
+        <mat-list>
+          <mat-list-item>
+            Datum: {{ weather.date }}
+          </mat-list-item>
+          <mat-list-item>
+            Uhrzeit: {{ weather.time }}
+          </mat-list-item>
+          <mat-list-item>
+            <img class="icon" src="/assets/icons/icons8-thermometer-48.png" alt="">
+            Temperatur: {{ weather.temperature }}°C
+          </mat-list-item><mat-list-item>
+          <img class="icon" src="/assets/icons/icons8-barometer-48.png" alt="">
+          Luftdruck: {{ weather.airPressure }}hPA
+        </mat-list-item>
+          <mat-list-item>
+            <img class="icon" src="/assets/icons/icons8-hygrometer-48.png" alt="">
+            Luftfeuchte: {{ weather.humidity }}%
+          </mat-list-item>
+          <mat-list-item>
+            <img class="icon" src="/assets/icons/icons8-wind-gauge-48.png" alt="">
+            Windgeschwindigkeit: {{ weather.windSpeed }}m/s
+          </mat-list-item>
+          <mat-list-item>
+            Windrichtung: {{ weather.windDirection }}Grad
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+  <ng-template #spinner>
+    <mat-spinner></mat-spinner>
+  </ng-template>
+</main>
