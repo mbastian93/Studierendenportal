@@ -14,6 +14,6 @@ const routes: Route[] = [
     RouterModule.forChild(routes),
     MaterialModule
   ],
-  declarations: []
+  declarations: [WeatherComponent]
 })
 export class WeatherModule { }
