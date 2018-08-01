@@ -23,10 +23,12 @@
   }
 }
 
- .spacer {
+.spacer {
    width: 40px;
  }
 
- .nav-icon {
-   padding-right: 16px;
+/deep/.mat-button-wrapper > .mat-icon {
+   padding: initial;
  }
+
+
