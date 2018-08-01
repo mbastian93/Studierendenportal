@@ -5,5 +5,9 @@ export class Person {
   lastname: string;
   contact = {} as Contact;
   orgname: string;
+  key: string;
 
+  constructor(key: string) {
+    this.key = key;
+  }
 }
