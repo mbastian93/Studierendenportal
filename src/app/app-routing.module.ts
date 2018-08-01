@@ -13,6 +13,7 @@ const routes: Routes = [
   {path: 'Personensuche', loadChildren: './person-search/person-search.module#PersonSearchModule'},
   {path: 'Veranstaltungen', loadChildren: './calendar/calendar.module#CalendarModule'},
   {path: 'Mensa', loadChildren: './canteen/canteen.module#CanteenModule'},
+  {path: 'Wetter', loadChildren: './weather/weather.module#WeatherModule'},
   {path: '**', component: IndexComponent}
 ];
 
