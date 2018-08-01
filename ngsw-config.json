@@ -42,8 +42,8 @@
       "cacheConfig": {
         "maxSize": 300,
         "maxAge": "24h",
-        "timeout?": "30s",
-        "strategy?": "performance"
+        "timeout": "30s",
+        "strategy": "performance"
       }
     },
     {
@@ -54,8 +54,33 @@
       "cacheConfig": {
         "maxSize": 300,
         "maxAge": "30d",
-        "timeout?": "30s",
-        "strategy?": "performance"
+        "timeout": "30s",
+        "strategy": "performance"
+      }
+    },
+    {
+      "name": "events",
+      "urls": [
+        "https://cors-anywhere.herokuapp.com/https://univis.uni-mainz.de/prg?search=events&show=xml",
+        "https://univis.uni-mainz.de/prg?search=events&show=xml"
+      ],
+      "cacheConfig": {
+        "maxSize": 300,
+        "maxAge": "30d",
+        "timeout": "30s",
+        "strategy": "performance"
+      }
+    },
+    {
+      "name": "canteen",
+      "urls": [
+        "https://www.studierendenwerk-mainz.de/speiseplan/Speiseplan.xml"
+      ],
+      "cacheConfig": {
+        "maxSize": 300,
+        "maxAge": "10d",
+        "timeout": "30s",
+        "strategy": "performance"
       }
     }
   ]
