@@ -1,27 +1,20 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NgModule} from '@angular/core';
-import {HttpClientModule, HttpClient} from '@angular/common/http';
+import {HttpClientModule} from '@angular/common/http';
 import {DomSanitizer} from '@angular/platform-browser';
-
+import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 /* App root */
 import {AppComponent} from './app.component';
+import {IndexComponent} from './index/index.component';
 
 /* Feature Modules */
 import {CoreModule} from './core/core.module';
-import {IndexComponent} from './index/index.component';
-import {NewsFeedModule} from './news-feed/news-feed.module';
-import {MapModule} from './map/map.module';
-import {BusScheduleModule} from './bus-schedule/bus-schedule.module';
 import {MaterialModule} from './material/material.module';
-import {PersonSearchModule} from './person-search/person-search.module';
-
 
 /* Routing Module */
 import {AppRoutingModule} from './app-routing.module';
-
 import {MatIconRegistry} from '@angular/material';
-
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {environment} from '../environments/environment';
 
@@ -37,11 +30,9 @@ import {environment} from '../environments/environment';
     AppRoutingModule,
     CoreModule,
     MaterialModule,
-    NewsFeedModule,
-    MapModule,
-    BusScheduleModule,
-    PersonSearchModule,
-    ServiceWorkerModule.register('/Studierendenportal/ngsw-worker.js', {enabled: environment.production})
+    ReactiveFormsModule,
+    FormsModule,
+    ServiceWorkerModule.register('https://mbastian93.github.io/Studierendenportal/ngsw-worker.js', {enabled: environment.production})
     // ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production})
   ],
   providers: [],
@@ -69,6 +60,16 @@ export class AppModule {
       .addSvgIcon('room',
         sanitizer.bypassSecurityTrustResourceUrl('assets/icons/home-map-marker.svg'))
       .addSvgIcon('person',
-        sanitizer.bypassSecurityTrustResourceUrl('assets/icons/account.svg'));
+        sanitizer.bypassSecurityTrustResourceUrl('assets/icons/account.svg'))
+      .addSvgIcon('calendar',
+        sanitizer.bypassSecurityTrustResourceUrl('assets/icons/calendar.svg'))
+      .addSvgIcon('info',
+        sanitizer.bypassSecurityTrustResourceUrl('assets/icons/information-outline.svg'))
+      .addSvgIcon('clock',
+        sanitizer.bypassSecurityTrustResourceUrl('assets/icons/clock-outline.svg'))
+      .addSvgIcon('marker',
+        sanitizer.bypassSecurityTrustResourceUrl('assets/icons/map-marker.svg'))
+      .addSvgIcon('meal',
+        sanitizer.bypassSecurityTrustResourceUrl('assets/icons/food-fork-drink.svg'));
   }
 }
