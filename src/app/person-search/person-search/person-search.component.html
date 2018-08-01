@@ -1,6 +1,6 @@
 <main class="content-container">
   <form id="personForm">
-    <mat-form-field class="selectForm">
+    <mat-form-field class="selectForm mat-elevation-z3">
       <input matInput type="text" name="searchPerson" id="searchPerson" placeholder="Nach Person suchen"
              ngDefaultControl [(ngModel)]="searchName" (keyup.enter)="searchPerson($event)" aria-label="Name eingeben">
     </mat-form-field>
@@ -16,7 +16,10 @@
           Name
         </th>
         <td mat-cell *matCellDef="let person">
-          {{ person.lastname + ', ' + person.firstname }}
+          {{ person.lastname }}
+          <span *ngIf=" person.firstname">
+            , {{ person.firstname }}
+          </span>
         </td>
       </ng-container>
       <ng-container matColumnDef="Einrichtung">
@@ -58,7 +61,11 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
     <ng-template #noResult>
-      Keine Ergebnisse gefunden
+      <mat-card>
+        <mat-card-content>
+          Keine Ergebnisse gefunden
+        </mat-card-content>
+      </mat-card>
     </ng-template>
   </div>
   <!-- Output for smaller devices -->
@@ -100,7 +107,11 @@
       </mat-expansion-panel>
     </mat-accordion>
     <ng-template #noResultMobile>
-      Keine Ergebnisse gefunden
+      <mat-card>
+        <mat-card-content>
+          Keine Ergebnisse gefunden
+        </mat-card-content>
+      </mat-card>
     </ng-template>
   </ng-template>
 </main>
