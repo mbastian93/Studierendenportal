@@ -1,5 +1,7 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ToolbarService} from './toolbar.service';
+import {JwksValidationHandler, OAuthService} from 'angular-oauth2-oidc';
+import {authConfig} from './auth.config';
 
 @Component({
   selector: 'app-root',
@@ -10,8 +12,11 @@ export class AppComponent implements OnInit {
   title = '';
   subscription: EventListener;
 
-  constructor(private ts: ToolbarService) {
-
+  constructor(
+    private ts: ToolbarService,
+    private oauthService: OAuthService
+  ) {
+      this.configureWithNewConfigApi();
   }
 
   ngOnInit() {
@@ -19,5 +24,11 @@ export class AppComponent implements OnInit {
       .subscribe(title => {
         this.title = title;
       });
+  }
+
+  private configureWithNewConfigApi() {
+    this.oauthService.configure(authConfig);
+    this.oauthService.tokenValidationHandler = new JwksValidationHandler();
+    this.oauthService.loadDiscoveryDocumentAndLogin();
   }
 }
