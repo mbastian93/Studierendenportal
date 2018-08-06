@@ -3,34 +3,37 @@
       <mat-card-content>
         <mat-list>
           <mat-list-item>
-            <img src="/assets/icons/icons8-calendar-48.png" alt="" class="icon">
+            <img class="icon" src="assets/icons/icons8-calendar-48.png" alt="">
             Datum: {{ weather.date }}
           </mat-list-item>
           <mat-list-item>
-            <img src="/assets/icons/icons8-clock-48.png" alt="" class="icon">
+            <img class="icon" src="assets/icons/icons8-clock-48.png" alt="">
             Uhrzeit: {{ weather.time }}
           </mat-list-item>
           <mat-list-item>
-            <img class="icon" src="/assets/icons/icons8-thermometer-48.png" alt="">
+            <img class="icon" src="assets/icons/icons8-thermometer-48.png" alt="">
             Temperatur: {{ weather.temperature }}°C
           </mat-list-item><mat-list-item>
-          <img class="icon" src="/assets/icons/icons8-barometer-48.png" alt="">
+          <img class="icon" src="assets/icons/icons8-barometer-48.png" alt="">
           Luftdruck: {{ weather.airPressure }}hPA
         </mat-list-item>
           <mat-list-item>
-            <img class="icon" src="/assets/icons/icons8-hygrometer-48.png" alt="">
+            <img class="icon" src="assets/icons/icons8-hygrometer-48.png" alt="">
             Luftfeuchte: {{ weather.humidity }}%
           </mat-list-item>
           <mat-list-item>
-            <img class="icon" src="/assets/icons/icons8-wind-gauge-48.png" alt="">
+            <img class="icon" src="assets/icons/icons8-wind-gauge-48.png" alt="">
             Windgeschwindigkeit: {{ weather.windSpeed }}m/s
           </mat-list-item>
           <mat-list-item>
-            <img class="icon" src="/assets/icons/icons8-windsock-48.png" alt="">
+            <img class="icon" src="assets/icons/icons8-windsock-48.png" alt="">
             Windrichtung: {{ weather.windDirection }}Grad
           </mat-list-item>
         </mat-list>
       </mat-card-content>
+      <mat-card-footer>
+        <a href="https://icons8.de">Icons by Icons8</a>
+      </mat-card-footer>
     </mat-card>
   <ng-template #spinner>
     <mat-spinner></mat-spinner>
