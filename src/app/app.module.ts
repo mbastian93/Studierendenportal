@@ -11,6 +11,7 @@ import {IndexComponent} from './index/index.component';
 /* Feature Modules */
 import {CoreModule} from './core/core.module';
 import {MaterialModule} from './material/material.module';
+import {OAuthModule } from 'angular-oauth2-oidc';
 
 /* Routing Module */
 import {AppRoutingModule} from './app-routing.module';
@@ -30,9 +31,10 @@ import {environment} from '../environments/environment';
     AppRoutingModule,
     CoreModule,
     MaterialModule,
+    OAuthModule.forRoot(),
     ReactiveFormsModule,
     FormsModule,
-    ServiceWorkerModule.register('https://mbastian93.github.io/Studierendenportal/ngsw-worker.js', {enabled: environment.production})
+     ServiceWorkerModule.register('https://mbastian93.github.io/Studierendenportal/ngsw-worker.js', {enabled: environment.production})
     // ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production})
   ],
   providers: [],
