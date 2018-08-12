@@ -1,3 +1,23 @@
-<p>
-  office-hours works!
-</p>
+<main class="content-container">
+  <mat-accordion *ngIf="offices.length > 0; else spinner">
+    <mat-expansion-panel *ngFor="let office of offices">
+      <mat-expansion-panel-header>
+        {{ office.name }}
+      </mat-expansion-panel-header>
+      <mat-list>
+        <mat-list-item *ngFor="let key of getKeys()">
+          {{ weekday[key] }}: <span class="hour">{{ printOpeningHours(office, key) }}</span>
+        </mat-list-item>
+        <mat-list-item *ngIf="office.exceptions">
+          {{office.exceptions.comment}}:
+          <span class="hour" *ngIf="office.exceptions.startTime">
+            {{office.exceptions.startTime}} - {{office.exceptions.endTime}} Uhr
+          </span>
+        </mat-list-item>
+      </mat-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <ng-template #spinner>
+    <mat-spinner></mat-spinner>
+  </ng-template>
+</main>
