@@ -1,51 +1,43 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Person} from '../models/person';
+import {Observable} from 'rxjs';
 
 
 const proxy = 'https://cors-anywhere.herokuapp.com/';
 const url = 'https://univis.uni-mainz.de/prg?search=persons&show=xml';
-const personUrl = 'https://univis.uni-mainz.de/prg?show=xml&key=741/persons/2017w:';
+const personUrl = 'https://univis.uni-mainz.de/prg?show=xml&key=749/persons/2017w:';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PersonSearchService {
 
-  foundPersons: Person[] = [];
   private domParser: DOMParser = new DOMParser();
 
   constructor(
     private http: HttpClient,
-  ) {
-  }
+  ) {  }
 
-  findPersons(name: string) {
+  findPersons(name: string): Observable<string> {
     // find person whose name is or begins with '$name'
-    this.http.get(proxy + url + '&fullname=' + name, {responseType: 'text'})
-      .toPromise()
-      .then(response => {
-        this.parsePersonsFromXmlToJson(response);
-      });
+    return this.http.get(proxy + url + '&fullname=' + name, {responseType: 'text'});
   }
 
   // search for person by ID
-  getPerson(id: string) {
+  getPerson(id: string): Observable<string> {
     // replace all '.' in ID with '/'
     const ref = id.replace('Person.', '').split('.').join('/');
-    this.http.get(proxy + personUrl + ref, {responseType: 'text'})
-      .toPromise()
-      .then(response => {
-        this.parsePersonsFromXmlToJson(response);
-      });
+    return this.http.get(proxy + personUrl + ref, {responseType: 'text'});
   }
 
-  private parsePersonsFromXmlToJson(response: string) {
+  parsePersonsFromXmlToJson(response: string): Person[] {
+    const foundPersons: Person[] = [];
     const personsAsXml = Array.from(this.domParser.parseFromString(response, 'text/xml')
       .getElementsByTagName('Person')) as Element[];
     // return when response doesn't contain any results
     if (personsAsXml.length === 0) {
-      return;
+      return foundPersons;
     }
     personsAsXml.forEach(personAsXml => {
       const key = personAsXml.getAttribute('key');
@@ -61,8 +53,8 @@ export class PersonSearchService {
       }
       const location = personAsXml.getElementsByTagName('location')[0] as Element;
       if (location === undefined) {
-        this.foundPersons.push(person);
-        return;
+        foundPersons.push(person);
+        return foundPersons;
       }
       let email;
       if ((email = location.getElementsByTagName('email')).length > 0) {
@@ -88,7 +80,8 @@ export class PersonSearchService {
       if ((tel = location.getElementsByTagName('tel')).length > 0) {
         person.contact.tel = tel[0].firstChild.nodeValue;
       }
-      this.foundPersons.push(person);
+      foundPersons.push(person);
     });
+    return foundPersons;
   }
 }

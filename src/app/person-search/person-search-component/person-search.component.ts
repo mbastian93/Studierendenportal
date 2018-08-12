@@ -13,10 +13,11 @@ import {ActivatedRoute} from '@angular/router';
 export class PersonSearchComponent implements OnInit {
 
   private title = 'JGU Portal | Personensuche';
-  foundPersons: Person[];
+  foundPersons: Person[] = [];
   displayedColumns: string[] = ['Name', 'Einrichtung', 'Raum', 'Telefon', 'Fax', 'E-Mail'];
   searchName: string;
   private lastSearch = '';
+  isSearching = false;
   mobile: boolean;
 
   @Input() id: string;
@@ -34,8 +35,6 @@ export class PersonSearchComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.getPerson(id);
-    } else {
-      this.foundPersons = this.personSearchService.foundPersons;
     }
     // display output as table on large enough screen
     this.mobile = window.screen.width <= 768;
@@ -54,17 +53,27 @@ export class PersonSearchComponent implements OnInit {
     if (this.searchName === undefined || this.searchName === '' || this.lastSearch === this.searchName) {
       return;
     }
+    // show spinning animation while searching
+    this.isSearching = true;
     // store last searched name
     this.lastSearch = this.searchName;
     // reset found persons
-    this.foundPersons.length = this.personSearchService.foundPersons.length = 0;
+    this.foundPersons.length = 0;
     // replace umlauts and other special characters before searching
-    this.personSearchService.findPersons(escape(this.searchName));
+    this.personSearchService.findPersons(escape(this.searchName))
+      .subscribe(response => {
+        // parse response
+        this.foundPersons = this.personSearchService.parsePersonsFromXmlToJson(response);
+        // stop animation
+        this.isSearching = false;
+      });
   }
 
   getPerson(id: string) {
-    this.personSearchService.getPerson(id);
-    this.foundPersons = this.personSearchService.foundPersons;
+    this.personSearchService.getPerson(id)
+      .subscribe(response => {
+        this.foundPersons = this.personSearchService.parsePersonsFromXmlToJson(response);
+      });
   }
 
 }
