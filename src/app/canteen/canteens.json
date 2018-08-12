@@ -1,0 +1,191 @@
+[
+  {
+    "name": "Hauptlager Zentralmensa",
+    "days": [],
+    "counters": [
+      {
+        "name": "Theke 1",
+        "types": [
+          102,
+          110,
+          112,
+          113,
+          610,
+          612
+        ],
+        "meals": []
+      },
+      {
+        "name": "Theke 2",
+        "types": [
+          120
+        ],
+        "meals": []
+      },
+      {
+        "name": "Theke 3",
+        "types": [
+          130,
+          630
+        ],
+        "meals": []
+      },
+      {
+        "name": "Theke 4",
+        "types": [
+          140,
+          142,
+          640,
+          642
+        ],
+        "meals": []
+      },
+      {
+        "name": "Suppen",
+        "types": [
+          100
+        ],
+        "meals": []
+      },
+      {
+        "name": "Beilagen",
+        "types": [
+          200,
+          201,
+          202
+        ],
+        "meals": []
+      }
+    ]
+  },
+  {
+    "name": "Mens@ria",
+    "days": [],
+    "counters": [
+      {
+        "name": "Theke 1",
+        "types": [
+          302,
+          303
+        ],
+        "meals": []
+      },
+      {
+        "name": "Theke 2",
+        "types": [
+          303
+        ],
+        "meals": []
+      },
+      {
+        "name": "Snack",
+        "types": [
+          104
+        ],
+        "meals": []
+      },
+      {
+        "name": "Frisch aus dem Kessel",
+        "types": [
+          101
+        ],
+        "meals": []
+      },
+      {
+        "name": "Eintopf",
+        "types": [
+          102
+        ],
+        "meals": []
+      },
+      {
+        "name": "Suppen",
+        "types": [
+          100
+        ],
+        "meals": []
+      }
+    ]
+  },
+  {
+    "name": "Mensa Georg Forster",
+    "days": [],
+    "counters": [
+      {
+        "name": "Theke 1",
+        "types": [
+          170
+        ],
+        "meals": []
+      },
+      {
+        "name": "Theke 2",
+        "types": [
+          300
+        ],
+        "meals": []
+      },
+      {
+        "name": "Eintopf",
+        "types": [
+          102
+        ],
+        "meals": []
+      },
+      {
+        "name": "Würstchen",
+        "types": [
+          103
+        ],
+        "meals": []
+      },
+      {
+        "name": "Frisch aus dem Kessel",
+        "types": [
+          101
+        ],
+        "meals": []
+      }
+    ]
+  },
+  {
+    "name": "Café Rewi",
+    "days": [],
+    "counters": [
+      {
+        "name": "Theke 1",
+        "types": [
+          180,
+          680
+        ],
+        "meals": []
+      },
+      {
+        "name": "Theke 2",
+        "types": [
+          102
+        ],
+        "meals": []
+      },
+      {
+        "name": "Beilagen",
+        "types": [
+          200
+        ],
+        "meals": []
+      },
+      {
+        "name": "Eintopf",
+        "types": [
+          102
+        ],
+        "meals": []
+      },
+      {
+        "name": "Salate",
+        "types": [],
+        "meals": []
+      }
+    ]
+  }
+]

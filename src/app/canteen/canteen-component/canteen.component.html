@@ -9,29 +9,38 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
-        <div class="output" *ngIf="todaysMeals">
-          <mat-card *ngFor="let meal of todaysMeals">
-            <mat-card-header>
-              <mat-card-title>
-                <h3>{{ meal.counter }}</h3>
-              </mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-              {{ meal.description }}
-              <br>
-              <br>
-              <div *ngIf="meal.hints">
-                Nährwertangaben: {{ meal.hints }}
-              </div>
-              <mat-chip-list [selectable]="false">
-                <mat-chip class="grey">
-                  {{ meal.priceStudents |currency: '€' }} / {{meal.priceEmployees | currency: '€' }}
-                </mat-chip>
-                <mat-chip class="green" *ngIf="meal.vegan">{{ meal.vegan }}</mat-chip>
-                <mat-chip class="red" *ngIf="meal.soldOut">{{ meal.soldOut }}</mat-chip>
-              </mat-chip-list>
-            </mat-card-content>
-          </mat-card>
+        <div class="output" *ngIf="counters.length > 0">
+          <mat-accordion>
+            <!-- counters for canteen -->
+            <mat-expansion-panel *ngFor="let counter of counters">
+              <mat-expansion-panel-header>
+                {{ counter.name }}
+              </mat-expansion-panel-header>
+              <!-- meals for counter -->
+              <mat-card *ngFor="let meal of counter.meals">
+                <mat-card-content>
+                  {{ meal.description }}
+                  <br>
+                  <br>
+                  <div *ngIf="meal.hints">
+                    Nährwertangaben: {{ meal.hints }}
+                  </div>
+                  <mat-card-footer>
+                    <mat-chip-list [selectable]="false">
+                      <mat-chip class="grey">
+                        {{ meal.priceStudents |currency: '€' }} / {{meal.priceEmployees | currency: '€' }}
+                      </mat-chip>
+                      <mat-chip class="green" *ngIf="meal.vegan">{{ meal.vegan }}</mat-chip>
+                      <mat-chip class="red" *ngIf="meal.soldOut">{{ meal.soldOut }}</mat-chip>
+                    </mat-chip-list>
+                  </mat-card-footer>
+                </mat-card-content>
+              </mat-card>
+              <mat-card *ngIf="counter.meals.length === 0">
+                Heute geschlossen
+              </mat-card>
+            </mat-expansion-panel>
+          </mat-accordion>
         </div>
       </mat-tab>
     </mat-tab-group>

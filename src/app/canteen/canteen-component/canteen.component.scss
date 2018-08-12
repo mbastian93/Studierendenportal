@@ -1,19 +1,32 @@
 .output {
-  display: flex;
-  flex-wrap: wrap;
   justify-content: center;
 }
 
 mat-card {
-  width: 350px;
+  max-width: 350px;
   cursor: initial;
 }
 
-mat-card-footer {
-  position: absolute;
-  right: 25px;
-  bottom: 30px;
+@media screen and (min-width: 376px){
+  mat-card {
+    width: 350px;
+  }
+}
 
+@media screen and(max-width: 375px) {
+  mat-card {
+    min-width: 317px;
+  }
+}
+
+@media screen and (max-width: 320px){
+  mat-card {
+    min-width: 262px;
+  }
+}
+
+mat-card-footer {
+  height: 40px;
 }
 
 .mat-chip-list-wrapper {
@@ -48,5 +61,11 @@ mat-chip-list {
 
 /deep/.mat-tab-header-pagination {
   background-color: #fff;
+}
+
+/deep/.mat-expansion-panel-body {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 

@@ -2,9 +2,8 @@ import { Component, OnInit} from '@angular/core';
 import {Title} from '@angular/platform-browser';
 import {ToolbarService} from '../../toolbar.service';
 import {CanteenService} from '../canteen.service';
-import {Canteen} from '../../models/canteen';
+import {Canteen, Counter} from '../../models/canteen';
 import {MatOptionSelectionChange, MatTabChangeEvent} from '@angular/material';
-import {Meal} from '../../models/meal';
 
 @Component({
   selector: 'app-canteen',
@@ -14,9 +13,9 @@ import {Meal} from '../../models/meal';
 export class CanteenComponent implements OnInit {
 
   private title = 'JGU Portal | Mensapläne ';
-  canteens: Canteen[];
+  canteens: Canteen[] = [];
   activeCanteen: Canteen;
-  todaysMeals: Meal[];
+  counters: Counter[] = [];
   today: string;
 
   constructor(
@@ -27,8 +26,10 @@ export class CanteenComponent implements OnInit {
 
   ngOnInit() {
     this.setTitle();
-    this.canteenService.fetchCanteenPlans();
-    this.canteens = this.canteenService.getCanteenPlans();
+    this.canteenService.getCanteenPlans()
+      .subscribe(response => {
+        this.canteens = this.canteenService.parseCanteenPlan(response);
+      });
   }
 
   private setTitle() {
@@ -40,15 +41,16 @@ export class CanteenComponent implements OnInit {
     if (!event.isUserInput) {
       return;
     }
+    // set the first tab is active by default
     if (this.activeCanteen === undefined) {
       this.activeCanteen = this.canteens[0];
     }
-    this.todaysMeals = this.activeCanteen.getMealsForDay(event.source.value);
-
+    this.counters = this.activeCanteen.getMealsForDayByCounter(event.source.value);
   }
 
+  // change the active canteen when switching tabs
   setActiveCanteen(event: MatTabChangeEvent) {
     this.activeCanteen = this.canteens[event.index];
-    this.todaysMeals  =  this.activeCanteen.getMealsForDay(this.today);
+    this.counters  =  this.activeCanteen.getMealsForDayByCounter(this.today);
   }
 }
