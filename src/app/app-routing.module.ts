@@ -14,6 +14,7 @@ const routes: Routes = [
   {path: 'Veranstaltungen', loadChildren: './calendar/calendar.module#CalendarModule'},
   {path: 'Mensa', loadChildren: './canteen/canteen.module#CanteenModule'},
   {path: 'Wetter', loadChildren: './weather/weather.module#WeatherModule'},
+  {path: 'Öffnungszeiten', loadChildren: './office-hours/office-hours.module#OfficeHoursModule'},
   {path: '**', component: IndexComponent}
 ];
 
