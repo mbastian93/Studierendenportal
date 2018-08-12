@@ -8,6 +8,7 @@ import {ToolbarService} from '../toolbar.service';
 import {PersonSearchService} from '../person-search/person-search.service';
 import {CalendarService} from '../calendar/calendar.service';
 import {WeatherService} from '../weather/weather.service';
+import {OfficeHoursService} from '../office-hours/office-hours.service';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import {WeatherService} from '../weather/weather.service';
     BusScheduleService,
     PersonSearchService,
     CalendarService,
-    WeatherService
+    WeatherService,
+    OfficeHoursService
   ]
 })
 export class CoreModule {
