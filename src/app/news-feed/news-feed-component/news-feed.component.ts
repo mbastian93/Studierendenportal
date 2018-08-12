@@ -6,6 +6,7 @@ import {NewsFeedSheetComponent} from './news-feed-sheet.component';
 import {FeedPost} from '../../models/feedPost';
 import {Title} from '@angular/platform-browser';
 import {ToolbarService} from '../../toolbar.service';
+import {RssFeedSource} from '../../models/rss-feed-source';
 
 @Component({
   selector: 'app-news-feed',
@@ -15,7 +16,8 @@ import {ToolbarService} from '../../toolbar.service';
 export class NewsFeedComponent implements OnInit {
 
   private title = 'JGU Portal | Nachrichten';
-  feeds: Feed[];
+  feeds: Feed[] = [];
+  feedSources: RssFeedSource[];
 
   constructor(
     private titleService: Title,
@@ -31,8 +33,12 @@ export class NewsFeedComponent implements OnInit {
   }
 
   getFeeds() {
-    this.feedService.getNews();
-    this.feeds = this.feedService.feedsAsJSON;
+    this.feedSources = this.feedService.getFeedSources();
+    this.feedSources.forEach(src => {
+      this.feedService.getNewsFromFeed(src.url).subscribe(feed => {
+        this.feeds.push(this.feedService.parseFeedFromXmlToJson(feed, src.name));
+      });
+    });
   }
 
   // open link directly only on devices without touch

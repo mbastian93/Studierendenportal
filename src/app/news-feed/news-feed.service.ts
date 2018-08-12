@@ -2,20 +2,15 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 // import models
-import {RSSFeed} from '../models/r-s-s-feed';
+import {RssFeedSource} from '../models/rss-feed-source';
 import {Feed} from '../models/feed';
 import {FeedDetails} from '../models/feed-details';
 import {FeedPost} from '../models/feedPost';
 
+declare var require: any;
 
-// list all sources, must point to RSS feed
 // remove proxy when using production
 const proxy = 'https://cors-anywhere.herokuapp.com/';
-// const proxy = 'https://crossorigin.me/';
-const feedSources: RSSFeed[] = [
-  {name: 'JGU Aktuell', url: 'https://www.uni-mainz.de/32.php'},
-  {name: 'ZDV', url: 'https://www.zdv.uni-mainz.de/feed/'},
-];
 
 @Injectable({
   providedIn: 'root'
@@ -23,37 +18,34 @@ const feedSources: RSSFeed[] = [
 export class NewsFeedService {
 
   feedsAsJSON: Feed[] = [];
-  private DOMParser: DOMParser = new DOMParser();
+  private feedSources = require('./RssFeeds.json') as RssFeedSource[];
 
   constructor(
     private http: HttpClient
   ) { }
+
+  getFeedSources(): RssFeedSource[] {
+    return this.feedSources;
+  }
 
   // fetch feed from source
   getNewsFromFeed(url: string): Observable<string> {
     return this.http.get(proxy + url, {responseType: 'text'});
   }
 
-  // fetch news from all feeds listed in feedSources and then parse from XML/RSS to JSON
-  getNews() {
-    // return when news already fetched
-    if (this.feedsAsJSON.length > 0) {
-      return;
-    }
-    feedSources.forEach((source) => {
-      this.getNewsFromFeed(source.url).toPromise()
-        .then(response => {
-          this.parseFeedFromXmlToJson(response, source.name);
-        });
-    });
-  }
-
 // parse XML feed from string to JSON
-  parseFeedFromXmlToJson(feedAsString: string, feedName: string) {
+  parseFeedFromXmlToJson(feedAsString: string, feedName: string): Feed {
+    // check if parsed feed is in cache and if so return it
+    this.feedsAsJSON.forEach(fAJ => {
+      if (fAJ.name === feedName) {
+        return fAJ;
+      }
+    });
     // initialize parameters
     const feedAsJson: Feed = new Feed(feedName);
     const details = new FeedDetails();
-    const feedAsXml = this.DOMParser.parseFromString(feedAsString, 'application/xml');
+    const domParser = new DOMParser();
+    const feedAsXml = domParser.parseFromString(feedAsString, 'application/xml');
     const docRoot = feedAsXml.getElementsByTagName('channel')[0] as Element;
     const feedItems = Array.from(docRoot.getElementsByTagName('item')) as Element[];
 
@@ -95,7 +87,7 @@ export class NewsFeedService {
     });
     this.sortItems(feedAsJson);
     this.feedsAsJSON.push(feedAsJson);
-
+    return feedAsJson;
   }
 
   // sort items of feed by date, newest first

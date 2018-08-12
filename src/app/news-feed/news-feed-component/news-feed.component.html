@@ -1,6 +1,6 @@
 <main class="content-container">
   <mat-tab-group *ngIf="feeds.length > 0; else spinner">
-    <mat-tab *ngFor="let feed of feeds" label="{{feed.feedName}}">
+    <mat-tab *ngFor="let feed of feeds" label="{{feed.name}}">
       <div class="output">
         <mat-card *ngFor="let item of feed.items" (click)="openLinkForItem(item)" class="mat-elevation-z3">
           <mat-card-header>
