@@ -1,5 +1,5 @@
 {
-  "index": "/index.html",
+  "index": "/Studierendenportal/index.html",
   "navigateFallback": "/index.html",
   "assetGroups": [
     {
@@ -79,6 +79,19 @@
       "cacheConfig": {
         "maxSize": 300,
         "maxAge": "10d",
+        "timeout": "30s",
+        "strategy": "performance"
+      }
+    },
+    {
+      "name": "openingHours",
+      "urls": [
+        "https://cors-anywhere.herokuapp.com/https://univis.uni-mainz.de/prg?search=departments&show=xml",
+        "https://univis.uni-mainz.de/prg?search=departments&show=xml"
+      ],
+      "cacheConfig": {
+        "maxSize": 300,
+        "maxAge": "30d",
         "timeout": "30s",
         "strategy": "performance"
       }
