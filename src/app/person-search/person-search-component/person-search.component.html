@@ -60,17 +60,20 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-    <ng-template #noResult>
+    <ng-template #noResult *ngIf="!isSearching; else spinner">
       <mat-card>
         <mat-card-content>
           Keine Ergebnisse gefunden
         </mat-card-content>
       </mat-card>
     </ng-template>
+    <ng-template #spinner>
+      <mat-spinner></mat-spinner>
+    </ng-template>
   </div>
   <!-- Output for smaller devices -->
   <ng-template #smallSize class="output">
-    <mat-accordion>
+    <mat-accordion *ngIf="foundPersons.length > 0; else noResultMobile">
       <mat-expansion-panel *ngFor="let person of foundPersons">
         <mat-expansion-panel-header>
           <mat-panel-title>
@@ -106,12 +109,15 @@
         </mat-list>
       </mat-expansion-panel>
     </mat-accordion>
-    <ng-template #noResultMobile>
+    <ng-template #noResultMobile *ngIf="!isSearching; else spinnerMobile">
       <mat-card>
         <mat-card-content>
           Keine Ergebnisse gefunden
         </mat-card-content>
       </mat-card>
+    </ng-template>
+    <ng-template #spinnerMobile>
+      <mat-spinner></mat-spinner>
     </ng-template>
   </ng-template>
 </main>
