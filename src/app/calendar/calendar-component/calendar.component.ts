@@ -23,7 +23,10 @@ export class CalendarComponent implements OnInit {
 
   ngOnInit() {
     this.setTitle();
-    this.calendarService.getEvents();
+    this.calendarService.getEvents()
+      .subscribe(events => {
+        this.events = this.calendarService.parseEventsFromXmlToJson(events);
+      });
     this.events = this.calendarService.events;
     this.mobile = window.screen.width <= 768;
   }

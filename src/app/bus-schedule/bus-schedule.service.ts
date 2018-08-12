@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {BusStop} from '../models/busStop';
 import {Observable} from 'rxjs/';
 import {DepartureBoard} from '../models/departureBoard';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 
 declare var require: any;
 
@@ -17,7 +17,7 @@ const url = 'https://www.rmv.de/hapi/departureBoard?' + apiKey + format + maxLen
 })
 export class BusScheduleService {
 
-  private busStations = require('./busStops.json') as BusStop[];
+  private busStops = require('./busStops.json') as BusStop[];
 
   constructor(
     private http: HttpClient
@@ -29,13 +29,7 @@ export class BusScheduleService {
     return this.http.get<DepartureBoard>(proxy + reqString);
   }
 
-  fetchDepartureBoards(): BusStop[] {
-      this.busStations.forEach(station => {
-          this.getDepartureBoardForStation(station.id).subscribe(
-            departureBoard => {
-              station.departureBoard = departureBoard;
-            });
-        });
-    return this.busStations;
+  getBusStops(): BusStop[] {
+    return this.busStops;
   }
 }

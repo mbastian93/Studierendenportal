@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Room} from '../models/room';
 import {Person} from '../models/person';
 import {UniEvent} from '../models/event';
+import {Observable} from 'rxjs';
 
 
 const proxy = 'https://cors-anywhere.herokuapp.com/';
@@ -23,17 +24,14 @@ export class CalendarService {
   ) {
   }
 
-  getEvents() {
-    if (this.events.length > 0) {
-      return;
-    }
-    this.http.get(proxy + url, {responseType: 'text'}).toPromise()
-      .then(response => {
-        this.parseEventsFromXmlToJson(response);
-      });
+  getEvents(): Observable<string> {
+    return this.http.get(proxy + url, {responseType: 'text'});
   }
 
   parseEventsFromXmlToJson(response: string) {
+    if (this.events.length > 0) {
+      return this.events;
+    }
     const doc = this.domParser.parseFromString(response, 'text/xml');
     const eventsAsXml = Array.from(doc.getElementsByTagName('Event')) as Element[];
     const PeronsAsXml = Array.from(doc.getElementsByTagName('Person')) as Element[];
@@ -120,6 +118,7 @@ export class CalendarService {
       this.events.push(event);
     });
     this.sortEvents(this.events);
+    return this.events;
   }
 
   // sort events by date, newest first

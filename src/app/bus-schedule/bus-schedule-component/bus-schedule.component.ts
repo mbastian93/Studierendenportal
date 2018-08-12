@@ -22,18 +22,23 @@ export class BusScheduleComponent implements OnInit {
   }
 
   ngOnInit() {
-    this. busStops = this.busStopService.fetchDepartureBoards();
-    // refresh every 60 seconds
-    /*
-    setInterval(() => {
-      this.busStops  = this.busStopService.fetchDepartureBoards();
-    }, 60000);
-    */
+    this.initBusStops();
     this.setTitle();
   }
 
   private setTitle() {
     this.titleService.setTitle(this.title);
     this.toolbarService.setToolbarTitle(this.title);
+  }
+
+  private initBusStops() {
+    // get bus stops an corresponding departure boards
+    this.busStops = this.busStopService.getBusStops();
+    this.busStops.forEach(busStop => {
+      this.busStopService.getDepartureBoardForStation(busStop.id)
+        .subscribe(departureBoard => {
+          busStop.departureBoard = departureBoard;
+        });
+    });
   }
 }
