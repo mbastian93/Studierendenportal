@@ -91,7 +91,8 @@ export class MapComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    // init map and ~ center at campus
+    // init map when component finished rendering
+    // create map object and ~ center at campus
     this.myMap = new Map({
       layers: [
         new TileLayer({
@@ -152,7 +153,6 @@ export class MapComponent implements OnInit, AfterViewInit {
     this.markerSource.clear();
     this.markerSource.addFeature(iconFeature);
   }
-
 
 }
 
