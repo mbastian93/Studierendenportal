@@ -17,7 +17,7 @@ export class CalendarComponent implements OnInit {
   panelOpenState = false;
   constructor(
     private titleService: Title,
-    private  toolbarService: ToolbarService,
+    private toolbarService: ToolbarService,
     private calendarService: CalendarService
   ) { }
 

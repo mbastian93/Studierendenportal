@@ -42,7 +42,7 @@ export class CalendarService {
       const key = roomAsXml.getAttribute('key');
       const room = new Room();
       room.name = roomAsXml.getElementsByTagName('name')[0].firstChild.nodeValue;
-      room.address = roomAsXml.getElementsByTagName('address')[0].firstChild.nodeValue;
+      room.address = roomAsXml.getElementsByTagName('address')[0] ? roomAsXml.getElementsByTagName('address')[0].firstChild.nodeValue : '';
       this.rooms[key] = room;
     });
 
