@@ -1,0 +1,98 @@
+[
+  {
+    "name": "Kursraum 1",
+    "workplaces": "28",
+    "printer": "yes",
+    "scanner": "no",
+    "overhead": "yes",
+    "projector": "yes",
+    "audio": "yes",
+    "location": "NatFak",
+    "buildingNumber": "1341",
+    "imagepath": "kursraum1"
+  },
+  {
+    "name": "Kursraum 2",
+    "workplaces": "28",
+    "printer": "yes",
+    "scanner": "no",
+    "overhead": "yes",
+    "projector": "yes",
+    "audio": "no",
+    "location": "NatFak",
+    "buildingNumber": "1341",
+    "imagepath": "kursraum2"
+  },
+  {
+    "name": "Kursraum 3",
+    "workplaces": "24",
+    "printer": "yes",
+    "scanner": "no",
+    "overhead": "yes",
+    "projector": "yes",
+    "audio": "no",
+    "location": "NatFak",
+    "buildingNumber": "1341",
+    "imagepath": "kursraum3"
+  },
+  {
+    "name": "Kursraum 4",
+    "workplaces": "26",
+    "printer": "yes",
+    "scanner": "yes",
+    "overhead": "no",
+    "projector": "yes",
+    "audio": "no",
+    "location": "NatFak",
+    "buildingNumber": "1341",
+    "imagepath": "kursraum4"
+  },
+  {
+    "name": "N 33",
+    "workplaces": "84",
+    "printer": "yes",
+    "scanner": "no",
+    "overhead": "no",
+    "projector": "yes",
+    "audio": "no",
+    "location": "NatFak",
+    "buildingNumber": "1341",
+    "imagepath": "N33"
+  },
+  {
+    "name": "ZDV Kursraum MI 1",
+    "workplaces": "18",
+    "printer": "yes",
+    "scanner": "no",
+    "overhead": "no",
+    "projector": "yes",
+    "audio": "no",
+    "location": "Institut für Mathematik",
+    "buildingNumber": "2413",
+    "imagepath": "MI1"
+  },
+  {
+    "name": "ZDV Kursraum MI 2",
+    "workplaces": "18",
+    "printer": "yes",
+    "scanner": "no",
+    "overhead": "no",
+    "projector": "yes",
+    "audio": "no",
+    "location": "Institut für Mathematik",
+    "buildingNumber": "2413",
+    "imagepath": "MI2"
+  },
+  {
+    "name": "03 432",
+    "workplaces": "20",
+    "printer": "yes",
+    "scanner": "no",
+    "overhead": "no",
+    "projector": "yes",
+    "audio": "yes",
+    "location": "SB II",
+    "buildingNumber": "1331",
+    "imagepath": "SBIIO3432"
+  }
+]
