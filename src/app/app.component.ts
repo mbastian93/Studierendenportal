@@ -29,6 +29,6 @@ export class AppComponent implements OnInit {
   private configureWithNewConfigApi() {
     this.oauthService.configure(authConfig);
     this.oauthService.tokenValidationHandler = new JwksValidationHandler();
-    this.oauthService.loadDiscoveryDocumentAndLogin();
+    this.oauthService.loadDiscoveryDocumentAndLogin({onTokenReceived: context => {console.log(context);}});
   }
 }
