@@ -12,23 +12,24 @@
   flex: 1;
 }
 
- #page-title {
-   margin: 0 auto;
-   font-size: 30px;
- }
+#page-title {
+  margin: 0 auto;
+  font-size: 30px;
+}
 
-@media screen and (max-width: 375px){
+@media screen and (max-width: 375px) {
   #page-title {
     font-size: 20px;
   }
 }
 
-.spacer {
-   width: 40px;
- }
+@media screen and (min-width: 426px) {
+  .spacer {
+    width: 40px;
+  }
+}
 
-/deep/.mat-button-wrapper > .mat-icon {
-   padding: initial;
- }
-
+/deep/ .mat-button-wrapper > .mat-icon {
+  padding: initial;
+}
 
