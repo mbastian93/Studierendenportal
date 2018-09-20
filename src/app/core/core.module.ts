@@ -10,6 +10,7 @@ import {CalendarService} from '../calendar/calendar.service';
 import {WeatherService} from '../weather/weather.service';
 import {OfficeHoursService} from '../office-hours/office-hours.service';
 import {LibraryIdService} from '../library-id/library-id.service';
+import {PcPoolsService} from '../pc-pools/pc-pools.service';
 
 @NgModule({
   imports: [
@@ -25,7 +26,8 @@ import {LibraryIdService} from '../library-id/library-id.service';
     CalendarService,
     WeatherService,
     OfficeHoursService,
-    LibraryIdService
+    LibraryIdService,
+    PcPoolsService
   ]
 })
 export class CoreModule {
