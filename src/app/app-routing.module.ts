@@ -15,6 +15,7 @@ const routes: Routes = [
   {path: 'Wetter', loadChildren: './weather/weather.module#WeatherModule'},
   {path: 'Öffnungszeiten', loadChildren: './office-hours/office-hours.module#OfficeHoursModule'},
   {path: 'Bibliotheksausweis', loadChildren: './library-id/library-id.module#LibraryIdModule'},
+  {path: 'PC-Pools', loadChildren: './pc-pools/pc-pools.module#PcPoolsModule'},
   {path: '**', component: IndexComponent}
 ];
 
