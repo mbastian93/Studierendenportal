@@ -7,3 +7,15 @@
   position: absolute;
   right: 16px;
 }
+
+.mat-tab-labels {
+  background-color: #fff;
+}
+
+/deep/ .mat-tab-header {
+  background-color: white;
+}
+
+/deep/.mat-tab-header-pagination {
+  background-color: #fff;
+}

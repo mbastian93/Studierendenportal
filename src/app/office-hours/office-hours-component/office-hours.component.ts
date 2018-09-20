@@ -2,7 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {ToolbarService} from '../../toolbar.service';
 import {Title} from '@angular/platform-browser';
 import {OfficeHoursService} from '../office-hours.service';
-import {Office, Weekday} from '../../models/office';
+import {Office, OfficeHour, Weekday} from '../../models/office';
+import {Department} from '../../models/department';
 
 @Component({
   selector: 'app-office-hours',
@@ -12,8 +13,7 @@ import {Office, Weekday} from '../../models/office';
 export class OfficeHoursComponent implements OnInit {
 
   private title = 'JGU Portal | Öffnungszeiten';
-  offices: Office[] = [];
-  weekday = Weekday;
+  departments: Department[];
 
   constructor(
     private titleService: Title,
@@ -24,8 +24,11 @@ export class OfficeHoursComponent implements OnInit {
 
   ngOnInit() {
     this.setTitle();
-    this.officeHoursService.getOpeningHours().subscribe(response => {
-      this.offices = this.officeHoursService.parseOpeningHours(response);
+    this.departments = this.officeHoursService.getDepartments();
+    this.departments.forEach(department => {
+      this.officeHoursService.getOpeningHoursForDepartment(department).subscribe(response => {
+        department.offices = this.officeHoursService.parseOpeningHours(response);
+      });
     });
   }
 
@@ -34,20 +37,19 @@ export class OfficeHoursComponent implements OnInit {
     this.toolbarService.setToolbarTitle(this.title);
   }
 
-  getKeys(): number[] {
-    return Array(7).fill('').map((x, i) => (i + 1) % 7);
+  getDifferingDays(officeHour: OfficeHour): string {
+    let  res = '';
+    if (officeHour.days.length > 1) {
+      res = officeHour.days[0] + ' - ' + officeHour.days[officeHour.days.length - 1];
+    } else {
+      res += officeHour.days[0];
+    }
+    return res;
   }
 
-  printOpeningHours(office: Office, key: number): string {
-    if (!office.openingHoursForDays.get(key) || !office.openingHoursForDays.get(key)[0]) {
-      return 'geschlossen';
-    }
-    let temp = office.openingHoursForDays.get(key)[0].startTime + ' - '
-      + office.openingHoursForDays.get(key)[0].endTime + 'Uhr';
-    if (office.openingHoursForDays.get(key).length > 1) {
-      temp += ', ' + office.openingHoursForDays.get(key)[1].startTime + ' - '
-        + office.openingHoursForDays.get(key)[1].endTime + 'Uhr';
-    }
+  printOpeningHours(officeHour: OfficeHour): string {
+    const temp = officeHour.startTime + ' - '
+      + officeHour.endTime + 'Uhr';
     return temp;
   }
 }

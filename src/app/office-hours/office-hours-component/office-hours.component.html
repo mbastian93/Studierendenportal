@@ -1,22 +1,28 @@
 <main class="content-container">
-  <mat-accordion *ngIf="offices.length > 0; else spinner">
-    <mat-expansion-panel *ngFor="let office of offices">
-      <mat-expansion-panel-header>
-        {{ office.name }}
-      </mat-expansion-panel-header>
-      <mat-list>
-        <mat-list-item *ngFor="let key of getKeys()">
-          {{ weekday[key] }}: <span class="hour">{{ printOpeningHours(office, key) }}</span>
-        </mat-list-item>
-        <mat-list-item *ngIf="office.exceptions">
-          {{office.exceptions.comment}}:
-          <span class="hour" *ngIf="office.exceptions.startTime">
+  <mat-tab-group *ngIf="departments[0].offices.length > 0; else spinner">
+    <mat-tab *ngFor="let department of departments" label="{{department.name}}">
+      <div class="output">
+        <mat-card *ngFor="let office of department.offices">
+          <mat-card-header>
+            <mat-card-title>
+              {{ office.name }}
+            </mat-card-title>
+          </mat-card-header>
+          <mat-list>
+            <mat-list-item *ngFor="let officeHour of office.officeHours">
+              {{ getDifferingDays(officeHour) }}: <span class="hour">{{ printOpeningHours(officeHour) }}</span>
+            </mat-list-item>
+            <mat-list-item *ngIf="office.exceptions">
+              {{office.exceptions.comment}}:
+              <span class="hour" *ngIf="office.exceptions.startTime">
             {{office.exceptions.startTime}} - {{office.exceptions.endTime}} Uhr
           </span>
-        </mat-list-item>
-      </mat-list>
-    </mat-expansion-panel>
-  </mat-accordion>
+            </mat-list-item>
+          </mat-list>
+        </mat-card>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
   <ng-template #spinner>
     <mat-spinner></mat-spinner>
   </ng-template>
