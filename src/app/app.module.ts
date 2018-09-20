@@ -34,8 +34,8 @@ import {environment} from '../environments/environment';
     OAuthModule.forRoot(),
     ReactiveFormsModule,
     FormsModule,
-     ServiceWorkerModule.register('https://mbastian93.github.io/Studierendenportal/ngsw-worker.js', {enabled: environment.production})
-    // ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production})
+    // ServiceWorkerModule.register('https://mbastian93.github.io/Studierendenportal/ngsw-worker.js', {enabled: environment.production})
+    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production})
   ],
   providers: [],
   bootstrap: [AppComponent]
@@ -74,6 +74,8 @@ export class AppModule {
       .addSvgIcon('meal',
         sanitizer.bypassSecurityTrustResourceUrl('assets/icons/food-fork-drink.svg'))
       .addSvgIcon('weather',
-        sanitizer.bypassSecurityTrustResourceUrl('assets/icons/weather-partlycloudy.svg'));
+        sanitizer.bypassSecurityTrustResourceUrl('assets/icons/weather-partlycloudy.svg'))
+      .addSvgIcon('id',
+      sanitizer.bypassSecurityTrustResourceUrl('assets/icons/account-card-details.svg'));
   }
 }
