@@ -1,0 +1,38 @@
+.value {
+  position: absolute;
+  right: 16px
+}
+
+mat-icon {
+  padding-right: initial;
+}
+
+mat-icon[svgIcon="ok"] {
+  color: green;
+}
+
+mat-icon[svgIcon="error"] {
+  color: red;
+}
+
+mat-expansion-panel {
+  max-width: 700px;
+}
+
+@media screen and (min-width: 748px){
+  mat-expansion-panel {
+    margin: 0 auto;
+  }
+}
+
+@media screen and (min-width: 426px) {
+  .mat-expansion-panel-spacing {
+    margin: 16px auto!important;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  /deep/ .mat-expansion-panel-body {
+    padding: 0 0 16px !important;
+  }
+}

@@ -1,3 +1,60 @@
-<p>
-  pc-pools works!
-</p>
+<div class="content-container">
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let pcPool of pcPools">
+      <mat-expansion-panel-header>
+        {{pcPool.name}}
+      </mat-expansion-panel-header>
+      <mat-list>
+        <mat-list-item>
+          Gebäude:<span class="value">{{pcPool.location}}</span>
+        </mat-list-item>
+        <mat-list-item>
+          Anzahl Arbeitsplätze:<span class="value">{{pcPool.workplaces}}</span>
+        </mat-list-item>
+        <mat-list-item>
+          Drucker:
+          <span class="value">
+          <mat-icon *ngIf="pcPool.printer === 'yes';else error" svgIcon="ok" class="nav-icon"></mat-icon>
+            <ng-template #error>
+              <mat-icon svgIcon="error" class="nav-icon"></mat-icon>
+            </ng-template>
+        </span>
+        </mat-list-item>
+        <mat-list-item>
+          Scanner:
+          <span class="value">
+            <mat-icon *ngIf="pcPool.scanner === 'yes';else error" svgIcon="ok" class="nav-icon"></mat-icon>
+            <ng-template #error>
+              <mat-icon svgIcon="error" class="nav-icon"></mat-icon>
+            </ng-template>
+          </span>
+        </mat-list-item>
+        <mat-list-item>
+          Overhead-Projektor:
+          <span class="value"> <mat-icon *ngIf="pcPool.overhead === 'yes';else error" svgIcon="ok" class="nav-icon">
+        </mat-icon>
+            <ng-template #error>
+              <mat-icon svgIcon="error" class="nav-icon"></mat-icon>
+            </ng-template>
+          </span>
+        </mat-list-item>
+        <mat-list-item>
+          Beamer:
+          <span class="value">
+            <mat-icon *ngIf="pcPool.projector === 'yes';else error" svgIcon="ok" class="nav-icon"></mat-icon>
+            <ng-template #error>
+              <mat-icon svgIcon="error" class="nav-icon"></mat-icon>
+            </ng-template></span>
+        </mat-list-item>
+        <mat-list-item>
+          Audio:
+          <span class="value">
+            <mat-icon *ngIf="pcPool.audio === 'yes';else error" svgIcon="ok"class="nav-icon"></mat-icon>
+            <ng-template #error>
+              <mat-icon svgIcon="error" class="nav-icon"></mat-icon>
+            </ng-template></span>
+        </mat-list-item>
+      </mat-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
