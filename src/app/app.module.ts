@@ -76,6 +76,12 @@ export class AppModule {
       .addSvgIcon('weather',
         sanitizer.bypassSecurityTrustResourceUrl('assets/icons/weather-partlycloudy.svg'))
       .addSvgIcon('id',
-      sanitizer.bypassSecurityTrustResourceUrl('assets/icons/account-card-details.svg'));
+      sanitizer.bypassSecurityTrustResourceUrl('assets/icons/account-card-details.svg'))
+      .addSvgIcon('pc-pool',
+        sanitizer.bypassSecurityTrustResourceUrl('assets/icons/desktop-classic.svg'))
+      .addSvgIcon('ok',
+        sanitizer.bypassSecurityTrustResourceUrl('assets/icons/check-circle.svg'))
+      .addSvgIcon('error',
+        sanitizer.bypassSecurityTrustResourceUrl('assets/icons/close-circle.svg'));
   }
 }
