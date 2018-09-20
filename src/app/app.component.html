@@ -13,7 +13,7 @@
     <!-- navigation menu -->
     <mat-sidenav #snav mode="over" (click)="snav.toggle()" role="navigation">
       <mat-nav-list>
-        <a mat-list-item routerLink="/Start">
+        <a mat-list-item routerLink="/">
           <mat-icon svgIcon="home" color="primary" class="nav-icon"></mat-icon>
           Start
         </a>
@@ -56,6 +56,11 @@
         <a mat-list-item routerLink="/Öffnungszeiten/">
           <mat-icon svgIcon="clock" color="primary" class="nav-icon"></mat-icon>
           Öffnungszeiten
+        </a>
+        <mat-divider></mat-divider>
+        <a mat-list-item routerLink="/Bibliotheksausweis/">
+          <mat-icon svgIcon="id" color="primary" class="nav-icon"></mat-icon>
+          Bibliotheksausweis
         </a>
       </mat-nav-list>
     </mat-sidenav>
