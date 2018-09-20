@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Title} from '@angular/platform-browser';
+import {ToolbarService} from '../../toolbar.service';
+import {LibraryIdService} from '../library-id.service';
 
 @Component({
   selector: 'app-library-id',
@@ -7,9 +10,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LibraryIdComponent implements OnInit {
 
-  constructor() { }
+  private title = 'JGU Portal | Bibliotheksausweis';
+  format = 'ITF14';
+  libaryId = '1234567890123';
+
+  constructor(
+    private titleService: Title,
+    private toolbarService: ToolbarService,
+    private libraryIdService: LibraryIdService) { }
 
   ngOnInit() {
+    this.setTitle();
+    /*
+    this.libraryIdService.getLibraryId()
+      .subscribe( reponse => this.libaryId = reponse);
+    */
   }
 
+  private setTitle() {
+    this.titleService.setTitle(this.title);
+    this.toolbarService.setToolbarTitle(this.title);
+  }
 }
