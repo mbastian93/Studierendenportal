@@ -18,12 +18,8 @@ export class CalendarService {
   events: UniEvent[] = [];
   persons = new Map<string, Person>();
   rooms = new Map<string, Venue>();
-  private domParser: DOMParser = new DOMParser();
 
-  constructor(
-    private http: HttpClient,
-  ) {
-  }
+  constructor( private http: HttpClient ) {  }
 
   getEvents(): UniEvent[] {
     return this.events;
@@ -34,7 +30,7 @@ export class CalendarService {
   }
 
   parseEventsFromXmlToJson(response: string): UniEvent[] {
-    const doc = this.domParser.parseFromString(response, 'text/xml');
+    const doc = new DOMParser().parseFromString(response, 'text/xml');
     const eventsAsXml = doc.getElementsByTagName('Event');
     const personsAsXml = doc.getElementsByTagName('Person');
     const roomsAsXml = doc.getElementsByTagName('Room');
