@@ -40,10 +40,10 @@
         "https://cors-anywhere.herokuapp.com/https://www.zdv.uni-mainz.de/feed/"
       ],
       "cacheConfig": {
-        "maxSize": 300,
+        "maxSize": 2,
         "maxAge": "24h",
         "timeout": "30s",
-        "strategy": "performance"
+        "strategy": "freshness"
       }
     },
     {
@@ -52,7 +52,7 @@
         "https://raeume.uni-mainz.de/aris-api/Building"
       ],
       "cacheConfig": {
-        "maxSize": 300,
+        "maxSize": 1,
         "maxAge": "30d",
         "timeout": "30s",
         "strategy": "performance"
@@ -65,7 +65,7 @@
         "https://univis.uni-mainz.de/prg?search=events&show=xml"
       ],
       "cacheConfig": {
-        "maxSize": 300,
+        "maxSize": 10,
         "maxAge": "30d",
         "timeout": "30s",
         "strategy": "performance"
@@ -90,8 +90,20 @@
         "https://univis.uni-mainz.de/prg?search=departments&show=xml"
       ],
       "cacheConfig": {
-        "maxSize": 300,
+        "maxSize": 3,
         "maxAge": "30d",
+        "timeout": "30s",
+        "strategy": "performance"
+      }
+    },
+    {
+      "name": "pcPools",
+      "urls": [
+        "https://cors-anywhere.herokuapp.com/https://pool-use.webapi.jgu.net/"
+      ],
+      "cacheConfig": {
+        "maxSize": 10,
+        "maxAge": "24h",
         "timeout": "30s",
         "strategy": "performance"
       }
