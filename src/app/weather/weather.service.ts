@@ -11,6 +11,7 @@ const url = 'http://wetter.physik.uni-mainz.de/karlscam/wetter.xml';
 })
 export class WeatherService {
 
+  weather: Weather;
   constructor(
     private http: HttpClient
   ) { }
@@ -19,10 +20,9 @@ export class WeatherService {
     return this.http.get(proxy + url, { responseType: 'text' } );
   }
 
-  parseWeatherData(response: string): Weather {
+  parseWeatherData(weatherAsXml: string): Weather {
     const weather: Weather = new Weather();
-    const domParser = new DOMParser();
-    const weatherDoc = domParser.parseFromString(response, 'text/xml');
+    const weatherDoc = new DOMParser().parseFromString(weatherAsXml, 'text/xml');
     weather.date = weatherDoc.getElementsByTagName('Datum')[0].firstElementChild.firstChild.nodeValue.trim();
     weather.time = weatherDoc.getElementsByTagName('Uhrzeit')[0].firstElementChild.firstChild.nodeValue.trim();
     weather.temperature = weatherDoc.getElementsByTagName('Temperatur')[0].firstElementChild.firstChild.nodeValue.trim();
@@ -30,6 +30,7 @@ export class WeatherService {
     weather.humidity = weatherDoc.getElementsByTagName('Luftfeuchte')[0].firstElementChild.firstChild.nodeValue.trim();
     weather.windSpeed = weatherDoc.getElementsByTagName('Windgeschwindigkeit')[0].firstElementChild.firstChild.nodeValue.trim();
     weather.windDirection = weatherDoc.getElementsByTagName('Windrichtung')[0].firstElementChild.firstChild.nodeValue.trim();
+    this.weather = weather;
     return weather;
   }
 }
