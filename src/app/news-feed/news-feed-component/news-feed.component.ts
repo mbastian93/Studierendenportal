@@ -34,11 +34,13 @@ export class NewsFeedComponent implements OnInit {
 
   getFeeds() {
     this.feedSources = this.feedService.getFeedSources();
-    this.feedSources.forEach(src => {
-      this.feedService.getNewsFromFeed(src.url).subscribe(feed => {
-        this.feeds.push(this.feedService.parseFeedFromXmlToJson(feed, src.name));
+    if ((this.feeds = this.feedService.feedsAsJSON).length === 0) {
+      this.feedSources.forEach(src => {
+        this.feedService.getNewsFromFeed(src.url).subscribe(feed => {
+          this.feedService.parseFeedFromXmlToJson(feed, src.name);
+        });
       });
-    });
+    }
   }
 
   // open link directly only on devices without touch
