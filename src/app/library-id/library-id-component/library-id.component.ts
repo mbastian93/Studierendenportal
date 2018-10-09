@@ -12,7 +12,7 @@ export class LibraryIdComponent implements OnInit {
 
   private title = 'JGU Portal | Bibliotheksausweis';
   format = 'ITF14';
-  libaryId = '1234567890123';
+  libraryId = '';
 
   constructor(
     private titleService: Title,
@@ -21,10 +21,8 @@ export class LibraryIdComponent implements OnInit {
 
   ngOnInit() {
     this.setTitle();
-    /*
     this.libraryIdService.getLibraryId()
-      .subscribe( reponse => this.libaryId = reponse);
-    */
+      .subscribe( reponse => this.libraryId = reponse);
   }
 
   private setTitle() {
