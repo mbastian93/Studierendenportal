@@ -1,12 +1,12 @@
 [
   {
     "name": "Zentrum für Datenverarbeitung",
-    "orgNumber": "30400043",
+    "orgNumber": 30400043,
     "offices": []
   },
   {
-    "name": "Universitätsbibliothek",
-    "orgNumber": "30101020",
+    "name": "Bibliotheken",
+    "orgNumber": 30101020,
     "offices": []
   }
 ]

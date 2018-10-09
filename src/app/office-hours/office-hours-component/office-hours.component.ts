@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {ToolbarService} from '../../toolbar.service';
 import {Title} from '@angular/platform-browser';
 import {OfficeHoursService} from '../office-hours.service';
-import {Office, OfficeHour, Weekday} from '../../models/office';
 import {Department} from '../../models/department';
+import {OfficeHour} from '../../models/officeHour';
 
 @Component({
   selector: 'app-office-hours',
@@ -37,19 +37,4 @@ export class OfficeHoursComponent implements OnInit {
     this.toolbarService.setToolbarTitle(this.title);
   }
 
-  getDifferingDays(officeHour: OfficeHour): string {
-    let  res = '';
-    if (officeHour.days.length > 1) {
-      res = officeHour.days[0] + ' - ' + officeHour.days[officeHour.days.length - 1];
-    } else {
-      res += officeHour.days[0];
-    }
-    return res;
-  }
-
-  printOpeningHours(officeHour: OfficeHour): string {
-    const temp = officeHour.startTime + ' - '
-      + officeHour.endTime + 'Uhr';
-    return temp;
-  }
 }

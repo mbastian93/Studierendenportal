@@ -1,8 +1,6 @@
 export class Contact {
-  email = 'keine Angabe';
-  fax = 'keine Angabe';
-  ort = 'keine Angabe';
-  office = 'keine Angabe';
-  street = 'keine Angabe';
-  tel = 'keine Angabe';
+  email: string;
+  fax: string ;
+  office: string;
+  tel: string;
 }
