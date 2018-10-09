@@ -40,10 +40,6 @@ export class CanteenService {
   }
 
   parseCanteenPlan(CanteenPlan: string): Canteen[] {
-    // return when data already fetched
-    if (this.canteens.length > 0) {
-      return this.canteens;
-    }
     // initialize canteens with name and counters
     this.rawCanteens.forEach(rawCanteen => {
       this.canteens.push(new Canteen(rawCanteen.name, rawCanteen.counters));
@@ -63,48 +59,44 @@ export class CanteenService {
         return;
       }
       // filter out salads and desserts
-      meal.type = mealAsXml.getAttribute('TYP');
-      if (+meal.type === 37 || +meal.type === 9) {
+      const type = +mealAsXml.getAttribute('TYP');
+      if (type === 37 || type === 9) {
         return;
       }
-      meal.artNr = mealAsXml.getAttribute('ARTNR');
-      if (meal.artNr === '' ) {
+      if (mealAsXml.getAttribute('ARTNR') === '' ) {
         return;
       }
-      meal.counter = mealAsXml.getAttribute('SPEISE');
-      if (meal.counter.toLowerCase().indexOf('salat') >= 0) {
+      // don't show salad counter
+      if (mealAsXml.getAttribute('SPEISE').toLowerCase().indexOf('salat') >= 0) {
         return;
       }
       // parse meal data
-      meal.buildingNr = mealAsXml.getAttribute('GEBNR');
       meal.description = mealAsXml.getAttribute('AUSGABETEXT');
-      meal.canteen = mealAsXml.getAttribute('MENSA');
-      meal.location = mealAsXml.getAttribute('ORT');
       meal.vegan = mealAsXml.getAttribute('MENUEKENNZTEXT');
       meal.additives = mealAsXml.getAttribute('ZSNUMMERN');
-      meal.priceStudents = mealAsXml.getAttribute('STUDIERENDE');
-      meal.priceEmployees = mealAsXml.getAttribute('BEDIENSTETE');
+      meal.priceStudents = +mealAsXml.getAttribute('STUDIERENDE');
+      meal.priceEmployees = +mealAsXml.getAttribute('BEDIENSTETE');
       meal.hints = mealAsXml.getAttribute('REZHINWEISE');
       meal.soldOut = mealAsXml.getAttribute('AUSVERKAUFT');
-      this.addMealToMensa(meal, locationID);
+      this.addMealToMensa(meal, locationID, type);
     });
     return this.canteens;
   }
 
-  private addMealToMensa(meal: Meal, mensaID: number) {
+  private addMealToMensa(meal: Meal, mensaID: number, type: number) {
     // add Meal to corresponding canteen
     switch (mensaID) {
       case 310:
-        this.canteens[0].addMeal(meal);
+        this.canteens[0].addMeal(meal, type);
         break;
       case 312:
-        this.canteens[1].addMeal(meal);
+        this.canteens[1].addMeal(meal, type);
         break;
       case 370:
-        this.canteens[2].addMeal(meal);
+        this.canteens[2].addMeal(meal, type);
         break;
       case 425:
-        this.canteens[3].addMeal(meal);
+        this.canteens[3].addMeal(meal, type);
         break;
     }
   }

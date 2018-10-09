@@ -3,7 +3,7 @@
     <mat-tab-group (selectedTabChange)="setActiveCanteen($event)">
       <mat-tab *ngFor="let canteen of canteens" label="{{ canteen.name }}">
         <mat-form-field class="selectForm mat-elevation-z3">
-          <mat-select placeholder="Tag auswählen" [(ngModel)]="today">
+          <mat-select placeholder="Tag auswählen" [(ngModel)]="selectedDay">
             <mat-option *ngFor="let day of canteen.days" [value]="day" (onSelectionChange)="handleSelect($event)">
               {{ day }}
             </mat-option>

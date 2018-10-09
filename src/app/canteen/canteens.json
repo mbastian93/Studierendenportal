@@ -1,6 +1,6 @@
 [
   {
-    "name": "Hauptlager Zentralmensa",
+    "name": "Zentralmensa",
     "days": [],
     "counters": [
       {
@@ -179,11 +179,6 @@
         "types": [
           102
         ],
-        "meals": []
-      },
-      {
-        "name": "Salate",
-        "types": [],
         "meals": []
       }
     ]

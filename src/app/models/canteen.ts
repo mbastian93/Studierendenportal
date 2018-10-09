@@ -1,4 +1,5 @@
 import {Meal} from './meal';
+import {Counter} from './counter';
 
 export class Canteen {
   name: string;
@@ -12,7 +13,7 @@ export class Canteen {
   getMealsForDayByCounter(day: string): Counter[] {
     const result: Counter[] = [];
     this.counters.forEach(counter => {
-      const temp: Counter = {name: counter.name, meals: [], types: []};
+      const temp: Counter = new Counter(counter.name);
       counter.meals.forEach(meal => {
         if (meal.date === day) {
           temp.meals.push(meal);
@@ -23,9 +24,9 @@ export class Canteen {
     return result;
   }
 
-  addMeal(meal: Meal) {
+  addMeal(meal: Meal, type: number) {
     this.counters.forEach(counter => {
-      if (counter.types.indexOf(+meal.type) >= 0) {
+      if (counter.types.indexOf(type) >= 0) {
         counter.meals.push(meal);
       }
     });
@@ -33,10 +34,4 @@ export class Canteen {
       this.days.push(meal.date);
     }
   }
-}
-
-export class Counter {
-  name: string;
-  types: number[];
-  meals: Meal[];
 }

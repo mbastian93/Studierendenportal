@@ -2,8 +2,9 @@ import { Component, OnInit} from '@angular/core';
 import {Title} from '@angular/platform-browser';
 import {ToolbarService} from '../../toolbar.service';
 import {CanteenService} from '../canteen.service';
-import {Canteen, Counter} from '../../models/canteen';
+import {Canteen} from '../../models/canteen';
 import {MatOptionSelectionChange, MatTabChangeEvent} from '@angular/material';
+import {Counter} from '../../models/counter';
 
 @Component({
   selector: 'app-canteen',
@@ -14,9 +15,9 @@ export class CanteenComponent implements OnInit {
 
   private title = 'JGU Portal | Mensapläne ';
   canteens: Canteen[] = [];
-  activeCanteen: Canteen;
+  selectedCanteen: Canteen;
   counters: Counter[] = [];
-  today: string;
+  selectedDay: string;
 
   constructor(
     private titleService: Title,
@@ -26,10 +27,12 @@ export class CanteenComponent implements OnInit {
 
   ngOnInit() {
     this.setTitle();
-    this.canteenService.getCanteenPlans()
-      .subscribe(response => {
-        this.canteens = this.canteenService.parseCanteenPlan(response);
-      });
+    if ((this.canteens = this.canteenService.canteens).length === 0) {
+      this.canteenService.getCanteenPlans()
+        .subscribe(response => {
+          this.canteens = this.canteenService.parseCanteenPlan(response);
+        });
+    }
   }
 
   private setTitle() {
@@ -39,18 +42,21 @@ export class CanteenComponent implements OnInit {
 
   handleSelect(event: MatOptionSelectionChange) {
     if (!event.isUserInput) {
+      console.log(event);
       return;
     }
-    // set the first tab is active by default
-    if (this.activeCanteen === undefined) {
-      this.activeCanteen = this.canteens[0];
+    // set the first tab as active by default
+    if (this.selectedCanteen === undefined) {
+      this.selectedCanteen = this.canteens[0];
     }
-    this.counters = this.activeCanteen.getMealsForDayByCounter(event.source.value);
+    this.counters = this.selectedCanteen.getMealsForDayByCounter(event.source.value);
   }
 
   // change the active canteen when switching tabs
   setActiveCanteen(event: MatTabChangeEvent) {
-    this.activeCanteen = this.canteens[event.index];
-    this.counters  =  this.activeCanteen.getMealsForDayByCounter(this.today);
+    this.selectedCanteen = this.canteens[event.index];
+    if (this.selectedDay !== undefined) {
+      this.counters  =  this.selectedCanteen.getMealsForDayByCounter(this.selectedDay);
+    }
   }
 }
