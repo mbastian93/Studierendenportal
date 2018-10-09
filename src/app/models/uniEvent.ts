@@ -7,8 +7,8 @@ export class UniEvent {
   endDate: string;
   endTime: string;
   presenter: string;
-  location = {} as Venue;
+  location: Venue;
   startDate: string;
   startTime: string;
-  person = {} as Person;
+  person: Person;
 }
