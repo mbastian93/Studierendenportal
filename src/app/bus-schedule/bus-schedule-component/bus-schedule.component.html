@@ -6,7 +6,6 @@
       </mat-expansion-panel-header>
       <table mat-table *ngIf="station.departureBoard.Departure !== undefined; else noDepartures"
              [dataSource]="station.departureBoard.Departure" class="mat-elevation-z3">
-
         <ng-container matColumnDef="Abfahrt (geplant)">
           <th mat-header-cell *matHeaderCellDef>Zeit</th>
           <td mat-cell *matCellDef="let departure">
@@ -36,7 +35,7 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
       <ng-template #noDepartures>
-        Keine Abfahrten
+        Keine Abfahrten in nächster Zeit
       </ng-template>
     </mat-expansion-panel>
   </mat-accordion>

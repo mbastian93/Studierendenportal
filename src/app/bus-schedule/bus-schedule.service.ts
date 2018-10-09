@@ -21,12 +21,10 @@ export class BusScheduleService {
 
   constructor(
     private http: HttpClient
-  ) {
-  }
+  ) {  }
 
   getDepartureBoardForStation(stationID: number): Observable<DepartureBoard> {
-    const reqString = url + '&id=' + stationID.toString();
-    return this.http.get<DepartureBoard>(proxy + reqString);
+    return this.http.get<DepartureBoard>(proxy + url + `&id=${stationID}`);
   }
 
   getBusStops(): BusStop[] {
