@@ -15,7 +15,6 @@ table {
 
 .selectForm {
   display: inline-block;
-  margin: 0 5px;
 }
 
 .orgname {
@@ -32,10 +31,21 @@ th>mat-icon {
     margin: 16px auto;
   }
   button {
+    margin-left: 10px;
+  }
+}
+
+@media screen and (max-width: 425px){
+  button {
     margin-top: 10px;
   }
 }
 
 mat-spinner {
   margin: 15% auto;
+}
+
+.noResult {
+  max-width: 500px;
+  margin: 0 auto;
 }

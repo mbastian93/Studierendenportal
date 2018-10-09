@@ -2,13 +2,13 @@
   <form id="personForm">
     <mat-form-field class="selectForm mat-elevation-z3">
       <input matInput type="text" name="searchPerson" id="searchPerson" placeholder="Nach Person suchen"
-             ngDefaultControl [(ngModel)]="searchName" (keyup.enter)="searchPerson($event)" aria-label="Name eingeben">
+             ngDefaultControl [(ngModel)]="searchName" (keyup.enter)="searchPerson()" aria-label="Name eingeben">
     </mat-form-field>
-    <button mat-raised-button color="primary" (click)="searchPerson($event)">Suchen</button>
+    <button mat-raised-button color="primary" (click)="searchPerson()">Suchen</button>
   </form>
   <!-- output person details in table on largeer devices -->
-  <div class="output" *ngIf="!mobile; else smallSize">
-    <table mat-table *ngIf="foundPersons.length > 0;else noResult" [dataSource]="foundPersons"
+  <div class="output" *ngIf="!mobile">
+    <table mat-table *ngIf="foundPersons.length > 0 && !isSearching" [dataSource]="foundPersons"
            class="mat-elevation-z3 grey">
       <ng-container matColumnDef="Name">
         <th mat-header-cell *matHeaderCellDef>
@@ -60,20 +60,16 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-    <ng-template #noResult *ngIf="!isSearching; else spinner">
-      <mat-card>
-        <mat-card-content>
-          Keine Ergebnisse gefunden
-        </mat-card-content>
-      </mat-card>
-    </ng-template>
-    <ng-template #spinner>
-      <mat-spinner></mat-spinner>
-    </ng-template>
+    <mat-card *ngIf="!isSearching && foundPersons.length === 0 && lastSearch != '';" class="noResult">
+      <mat-card-content>
+        Keine Ergebnisse gefunden
+      </mat-card-content>
+    </mat-card>
+    <mat-spinner *ngIf="isSearching"></mat-spinner>
   </div>
   <!-- Output for smaller devices -->
-  <ng-template #smallSize class="output">
-    <mat-accordion *ngIf="foundPersons.length > 0; else noResultMobile">
+  <ng-container *ngIf="mobile" class="output">
+    <mat-accordion *ngIf="foundPersons.length > 0 && !isSearching;">
       <mat-expansion-panel *ngFor="let person of foundPersons">
         <mat-expansion-panel-header>
           <mat-panel-title>
@@ -109,15 +105,11 @@
         </mat-list>
       </mat-expansion-panel>
     </mat-accordion>
-    <ng-template #noResultMobile *ngIf="!isSearching; else spinnerMobile">
-      <mat-card>
-        <mat-card-content>
-          Keine Ergebnisse gefunden
-        </mat-card-content>
-      </mat-card>
-    </ng-template>
-    <ng-template #spinnerMobile>
-      <mat-spinner></mat-spinner>
-    </ng-template>
-  </ng-template>
+    <mat-card *ngIf="!isSearching && foundPersons.length === 0 && lastSearch != '';" class="noResult">
+      <mat-card-content>
+        Keine Ergebnisse gefunden
+      </mat-card-content>
+    </mat-card>
+    <mat-spinner *ngIf="isSearching"></mat-spinner>
+  </ng-container>
 </main>

@@ -16,7 +16,7 @@ export class PersonSearchComponent implements OnInit {
   foundPersons: Person[] = [];
   displayedColumns: string[] = ['Name', 'Einrichtung', 'Raum', 'Telefon', 'Fax', 'E-Mail'];
   searchName: string;
-  private lastSearch = '';
+  lastSearch = '';
   isSearching = false;
   mobile: boolean;
 
@@ -46,9 +46,7 @@ export class PersonSearchComponent implements OnInit {
     this.toolbarService.setToolbarTitle(this.title);
   }
 
-  searchPerson(event: Event) {
-    // prevent from submitting form
-    event.preventDefault();
+  searchPerson() {
     // dont search for empty or undefined name or when the input has not changed
     if (this.searchName === undefined || this.searchName === '' || this.lastSearch === this.searchName) {
       return;
@@ -57,8 +55,6 @@ export class PersonSearchComponent implements OnInit {
     this.isSearching = true;
     // store last searched name
     this.lastSearch = this.searchName;
-    // reset found persons
-    this.foundPersons.length = 0;
     // replace umlauts and other special characters before searching
     this.personSearchService.findPersons(escape(this.searchName))
       .subscribe(response => {
