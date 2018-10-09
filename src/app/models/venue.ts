@@ -1,4 +1,4 @@
-export class Room {
+export class Venue {
   name: string;
   address: string;
 }

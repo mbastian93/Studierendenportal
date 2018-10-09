@@ -3,7 +3,7 @@
     <mat-accordion>
       <mat-expansion-panel *ngFor="let event of events" expandedHeight="auto">
         <mat-expansion-panel-header collapsedHeight="auto" expandedHeight="auto">
-          <mat-panel-title [ngClass]="panelOpenState? 'expanded' : 'collapsed' ">
+          <mat-panel-title>
             <span class="date">{{ event.startDate | date: 'dd.MM' }}</span> {{ event.title }}
           </mat-panel-title>
         </mat-expansion-panel-header>

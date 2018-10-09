@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Title} from '@angular/platform-browser';
 import {ToolbarService} from '../../toolbar.service';
 import {CalendarService} from '../calendar.service';
-import {UniEvent} from '../../models/event';
+import {UniEvent} from '../../models/uniEvent';
 
 @Component({
   selector: 'app-calendar',
@@ -12,9 +12,7 @@ import {UniEvent} from '../../models/event';
 export class CalendarComponent implements OnInit {
 
   private title = 'JGU Portal | Veranstaltungen';
-  events: UniEvent[];
-  mobile: boolean;
-  panelOpenState = false;
+  events: UniEvent[] = [];
   constructor(
     private titleService: Title,
     private toolbarService: ToolbarService,
@@ -23,12 +21,12 @@ export class CalendarComponent implements OnInit {
 
   ngOnInit() {
     this.setTitle();
-    this.calendarService.getEvents()
-      .subscribe(events => {
-        this.events = this.calendarService.parseEventsFromXmlToJson(events);
-      });
-    this.events = this.calendarService.events;
-    this.mobile = window.screen.width <= 768;
+    if ((this.events = this.calendarService.getEvents()).length === 0 ) {
+      this.calendarService.getEventsFromServer()
+        .subscribe(events => {
+          this.events = this.calendarService.parseEventsFromXmlToJson(events);
+        });
+    }
   }
 
   private setTitle() {

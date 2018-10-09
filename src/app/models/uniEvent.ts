@@ -1,4 +1,4 @@
-import {Room} from './room';
+import {Venue} from './venue';
 import {Person} from './person';
 
 export class UniEvent {
@@ -7,7 +7,7 @@ export class UniEvent {
   endDate: string;
   endTime: string;
   presenter: string;
-  location = {} as Room;
+  location = {} as Venue;
   startDate: string;
   startTime: string;
   person = {} as Person;
