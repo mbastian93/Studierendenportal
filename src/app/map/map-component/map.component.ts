@@ -81,8 +81,10 @@ export class MapComponent implements OnInit, AfterViewInit {
     // only suggest buildings whose name or nickname begins with same substring
     const filterValue = name.toLowerCase();
 
-    return this.buildings.filter((building) => building.name.toLowerCase().startsWith(filterValue)
-      || (building.nickname && building.nickname.toLowerCase().startsWith(filterValue)));
+    return this.buildings.filter(building => {
+      return building.name.toLowerCase().startsWith(filterValue)
+      || (building.nickname && building.nickname.toLowerCase().startsWith(filterValue));
+    });
   }
 
   private setTitle() {

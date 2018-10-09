@@ -3,18 +3,18 @@
     <input matInput type="text" id="searchField" name="searchField" placeholder="Nach Gebäude suchen"
            aria-label="Gebäude auswählen"
            [formControl]="ctrl" [matAutocomplete]="auto">
-    <mat-autocomplete #auto="matAutocomplete">
-      <mat-option *ngFor="let building of filteredBuildings | async" [value]="building.name"
-                  (onSelectionChange)="centerMapAtBuilding(building, $event)">
-        {{ building.name }}
-        <span *ngIf="building.nickname">({{ building.nickname }})</span>
-      </mat-option>
-    </mat-autocomplete>
   </mat-form-field>
+  <mat-autocomplete #auto="matAutocomplete">
+    <mat-option *ngFor="let building of filteredBuildings | async" [value]="building"
+                (onSelectionChange)="centerMapAtBuilding(building, $event)">
+        {{ building.name }}
+      <span *ngIf="building.nickname">({{ building.nickname }})</span>
+    </mat-option>
+  </mat-autocomplete>
   <div class="output">
-    <div id="map" class="map">
-      <div #popup id="popup">
-        <mat-card id="address" *ngIf="(focusedBuilding !== undefined)" [style.opacity]="showAddress? '1':'0'" >
+    <div id="map">
+      <div #popup>
+        <mat-card id="address" *ngIf="focusedBuilding !== undefined" [style.opacity]="showAddress? '1':'0'" >
           {{ focusedBuilding.defaultAddress }}
         </mat-card>
       </div >
