@@ -1,20 +1,20 @@
 <div class="content-container">
-  <mat-accordion>
+  <mat-accordion *ngIf="pcPools.length > 0; else spinner">
     <mat-expansion-panel *ngFor="let pcPool of pcPools">
       <mat-expansion-panel-header>
-        {{pcPool.name}}
+        <mat-panel-title>
+          {{pcPool.roomName}}
+          <span *ngIf="pcPool.details.location">&nbsp;({{pcPool.details.location}})</span>
+        </mat-panel-title>
       </mat-expansion-panel-header>
       <mat-list>
         <mat-list-item>
-          Gebäude:<span class="value">{{pcPool.location}}</span>
-        </mat-list-item>
-        <mat-list-item>
-          Anzahl Arbeitsplätze:<span class="value">{{pcPool.workplaces}}</span>
+          Anzahl Arbeitsplätze:<span class="value">{{pcPool.details.workplaces}}</span>
         </mat-list-item>
         <mat-list-item>
           Drucker:
           <span class="value">
-          <mat-icon *ngIf="pcPool.printer === 'yes';else error" svgIcon="ok" class="nav-icon"></mat-icon>
+          <mat-icon *ngIf="pcPool.details.printer;else error" svgIcon="ok" class="nav-icon"></mat-icon>
             <ng-template #error>
               <mat-icon svgIcon="error" class="nav-icon"></mat-icon>
             </ng-template>
@@ -23,7 +23,7 @@
         <mat-list-item>
           Scanner:
           <span class="value">
-            <mat-icon *ngIf="pcPool.scanner === 'yes';else error" svgIcon="ok" class="nav-icon"></mat-icon>
+            <mat-icon *ngIf="pcPool.details.scanner;else error" svgIcon="ok" class="nav-icon"></mat-icon>
             <ng-template #error>
               <mat-icon svgIcon="error" class="nav-icon"></mat-icon>
             </ng-template>
@@ -31,7 +31,7 @@
         </mat-list-item>
         <mat-list-item>
           Overhead-Projektor:
-          <span class="value"> <mat-icon *ngIf="pcPool.overhead === 'yes';else error" svgIcon="ok" class="nav-icon">
+          <span class="value"> <mat-icon *ngIf="pcPool.details.overhead;else error" svgIcon="ok" class="nav-icon">
         </mat-icon>
             <ng-template #error>
               <mat-icon svgIcon="error" class="nav-icon"></mat-icon>
@@ -41,7 +41,7 @@
         <mat-list-item>
           Beamer:
           <span class="value">
-            <mat-icon *ngIf="pcPool.projector === 'yes';else error" svgIcon="ok" class="nav-icon"></mat-icon>
+            <mat-icon *ngIf="pcPool.details.projector;else error" svgIcon="ok" class="nav-icon"></mat-icon>
             <ng-template #error>
               <mat-icon svgIcon="error" class="nav-icon"></mat-icon>
             </ng-template></span>
@@ -49,12 +49,29 @@
         <mat-list-item>
           Audio:
           <span class="value">
-            <mat-icon *ngIf="pcPool.audio === 'yes';else error" svgIcon="ok"class="nav-icon"></mat-icon>
+            <mat-icon *ngIf="pcPool.details.audio;else error" svgIcon="ok" class="nav-icon"></mat-icon>
             <ng-template #error>
               <mat-icon svgIcon="error" class="nav-icon"></mat-icon>
             </ng-template></span>
         </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item *ngIf="pcPool.events && pcPool.events.length > 0" class="courseData">
+          Veranstaltungen:
+        </mat-list-item>
+        <mat-card *ngFor="let event of pcPool.events">
+          <mat-list>
+            <mat-list-item class="courseData">
+              {{event.title}}
+            </mat-list-item>
+            <mat-list-item class="courseData">
+              Von {{event.from | date:'dd.MM.yy, H:mm' }} Uhr bis {{event.to | date:'dd.MM.yy, H:mm'}} Uhr
+            </mat-list-item>
+          </mat-list>
+        </mat-card>
       </mat-list>
     </mat-expansion-panel>
   </mat-accordion>
+  <ng-template #spinner>
+    <mat-spinner></mat-spinner>
+  </ng-template>
 </div>

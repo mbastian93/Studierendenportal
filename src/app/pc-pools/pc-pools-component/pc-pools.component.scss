@@ -36,3 +36,15 @@ mat-expansion-panel {
     padding: 0 0 16px !important;
   }
 }
+
+mat-card > mat-list {
+  padding-top: 0px;
+}
+
+mat-card {
+  padding: 0;
+}
+
+.mat-list-item.courseData {
+  height: 30px;
+}

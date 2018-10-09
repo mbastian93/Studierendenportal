@@ -1,98 +1,114 @@
 [
   {
-    "name": "Kursraum 1",
-    "workplaces": "28",
-    "printer": "yes",
-    "scanner": "no",
-    "overhead": "yes",
-    "projector": "yes",
-    "audio": "yes",
-    "location": "NatFak",
-    "buildingNumber": "1341",
-    "imagepath": "kursraum1"
+    "roomName": "Kursraum 1",
+    "details": {
+      "workplaces": "28",
+      "printer": true,
+      "scanner": false,
+      "overhead": true,
+      "projector": true,
+      "audio": true,
+      "location": "NatFak",
+      "buildingNumber": "1341",
+      "imagepath": "kursraum1"
+    }
   },
   {
-    "name": "Kursraum 2",
-    "workplaces": "28",
-    "printer": "yes",
-    "scanner": "no",
-    "overhead": "yes",
-    "projector": "yes",
-    "audio": "no",
-    "location": "NatFak",
-    "buildingNumber": "1341",
-    "imagepath": "kursraum2"
+    "roomName": "Kursraum 2",
+    "details": {
+      "workplaces": "28",
+      "printer": true,
+      "scanner": false,
+      "overhead": true,
+      "projector": true,
+      "audio": false,
+      "location": "NatFak",
+      "buildingNumber": "1341",
+      "imagepath": "kursraum2"
+    }
   },
   {
-    "name": "Kursraum 3",
-    "workplaces": "24",
-    "printer": "yes",
-    "scanner": "no",
-    "overhead": "yes",
-    "projector": "yes",
-    "audio": "no",
-    "location": "NatFak",
-    "buildingNumber": "1341",
-    "imagepath": "kursraum3"
+    "roomName": "Kursraum 3",
+    "details": {
+      "workplaces": "24",
+      "printer": true,
+      "scanner": false,
+      "overhead": true,
+      "projector": true,
+      "audio": false,
+      "location": "NatFak",
+      "buildingNumber": "1341",
+      "imagepath": "kursraum3"
+    }
   },
   {
-    "name": "Kursraum 4",
-    "workplaces": "26",
-    "printer": "yes",
-    "scanner": "yes",
-    "overhead": "no",
-    "projector": "yes",
-    "audio": "no",
-    "location": "NatFak",
-    "buildingNumber": "1341",
-    "imagepath": "kursraum4"
+    "roomName": "Kursraum 4",
+    "details": {
+      "workplaces": "26",
+      "printer": true,
+      "scanner": true,
+      "overhead": false,
+      "projector": true,
+      "audio": false,
+      "location": "NatFak",
+      "buildingNumber": "1341",
+      "imagepath": "kursraum4"
+    }
   },
   {
-    "name": "N 33",
-    "workplaces": "84",
-    "printer": "yes",
-    "scanner": "no",
-    "overhead": "no",
-    "projector": "yes",
-    "audio": "no",
-    "location": "NatFak",
-    "buildingNumber": "1341",
-    "imagepath": "N33"
+    "roomName": "N 33",
+    "details": {
+      "workplaces": "84",
+      "printer": true,
+      "scanner": false,
+      "overhead": false,
+      "projector": true,
+      "audio": false,
+      "location": "NatFak",
+      "buildingNumber": "1341",
+      "imagepath": "N33"
+    }
   },
   {
-    "name": "ZDV Kursraum MI 1",
-    "workplaces": "18",
-    "printer": "yes",
-    "scanner": "no",
-    "overhead": "no",
-    "projector": "yes",
-    "audio": "no",
-    "location": "Institut für Mathematik",
-    "buildingNumber": "2413",
-    "imagepath": "MI1"
+    "roomName": "ZDV Kursraum MI 1",
+    "details": {
+      "workplaces": "18",
+      "printer": true,
+      "scanner": false,
+      "overhead": false,
+      "projector": true,
+      "audio": false,
+      "location": "Institut für Mathematik",
+      "buildingNumber": "2413",
+      "imagepath": "MI1"
+    }
   },
   {
-    "name": "ZDV Kursraum MI 2",
-    "workplaces": "18",
-    "printer": "yes",
-    "scanner": "no",
-    "overhead": "no",
-    "projector": "yes",
-    "audio": "no",
-    "location": "Institut für Mathematik",
-    "buildingNumber": "2413",
-    "imagepath": "MI2"
+    "roomName": "ZDV Kursraum MI 2",
+    "details": {
+      "workplaces": "18",
+      "printer": true,
+      "scanner": false,
+      "overhead": false,
+      "projector": true,
+      "audio": false,
+      "location": "Institut für Mathematik",
+      "buildingNumber": "2413",
+      "imagepath": "MI2"
+    }
   },
   {
-    "name": "03 432",
-    "workplaces": "20",
-    "printer": "yes",
-    "scanner": "no",
-    "overhead": "no",
-    "projector": "yes",
-    "audio": "yes",
-    "location": "SB II",
-    "buildingNumber": "1331",
-    "imagepath": "SBIIO3432"
+    "roomName": "03 432",
+    "details": {
+      "workplaces": "20",
+      "printer": true,
+      "scanner": false,
+      "overhead": false,
+      "projector": true,
+      "audio": true,
+      "location": "SB II",
+      "buildingNumber": "1331",
+      "imagepath": "SBIIO3432"
+    }
   }
 ]

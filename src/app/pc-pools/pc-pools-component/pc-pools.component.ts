@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ToolbarService} from '../../toolbar.service';
 import {Title} from '@angular/platform-browser';
 import {PcPoolsService} from '../pc-pools.service';
@@ -18,11 +18,15 @@ export class PcPoolsComponent implements OnInit {
     private titleService: Title,
     private toolbarService: ToolbarService,
     private pcPoolsService: PcPoolsService
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     this.setTitle();
-    this.pcPools = this.pcPoolsService.getComputePools();
+    this.pcPoolsService.getComputePools()
+      .subscribe(computePools => {
+        this.pcPools = computePools;
+      });
   }
 
   private setTitle() {
