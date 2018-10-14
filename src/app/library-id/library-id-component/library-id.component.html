@@ -1,7 +1,12 @@
-<mat-card>
+<mat-card *ngIf="libraryId !== ''; else loading">
   <mat-card-content>
     <img src="/assets/img/LogoUB.jpg" alt="" width="290px">
-    <ngx-barcode *ngIf="libraryId" [bc-value]="libraryId" [bc-format]="format" [bc-display-value]="true">
+    <ngx-barcode *ngIf="libraryId !== undefined; else noId"
+                 [bc-value]="libraryId" [bc-format]="format" [bc-display-value]="true">
     </ngx-barcode>
+    <ng-template #noId>
+      <div>Kein Bibliotheksausweis hinterlegt.</div>
+    </ng-template>
   </mat-card-content>
 </mat-card>
+<ng-template #loading><mat-spinner></mat-spinner></ng-template>

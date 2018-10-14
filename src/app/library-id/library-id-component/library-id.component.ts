@@ -22,7 +22,7 @@ export class LibraryIdComponent implements OnInit {
   ngOnInit() {
     this.setTitle();
     this.libraryIdService.getLibraryId()
-      .subscribe( reponse => this.libraryId = reponse);
+      .subscribe( response => this.libraryId = response.own[0]);
   }
 
   private setTitle() {
