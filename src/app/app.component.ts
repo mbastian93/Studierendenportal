@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
     private ts: ToolbarService,
     private oauthService: OAuthService
   ) {
-      this.configureWithNewConfigApi();
+      // this.configureWithNewConfigApi();
   }
 
   ngOnInit() {

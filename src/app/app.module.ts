@@ -34,7 +34,6 @@ import {environment} from '../environments/environment';
     OAuthModule.forRoot(),
     ReactiveFormsModule,
     FormsModule,
-    // ServiceWorkerModule.register('https://mbastian93.github.io/Studierendenportal/ngsw-worker.js', {enabled: environment.production})
     ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production})
   ],
   providers: [],

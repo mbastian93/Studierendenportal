@@ -19,7 +19,8 @@ export class CalendarService {
   persons = new Map<string, Person>();
   rooms = new Map<string, Venue>();
 
-  constructor( private http: HttpClient ) {  }
+  constructor(private http: HttpClient) {
+  }
 
   getEvents(): UniEvent[] {
     return this.events;
@@ -48,8 +49,14 @@ export class CalendarService {
       const event = new UniEvent();
       const contactKey = (eventAsXml.getElementsByTagName('contact')[0].firstChild as Element).getAttribute('key');
       event.person = this.persons.get(contactKey);
-      const roomKey = (eventAsXml.getElementsByTagName('room')[0].firstChild as Element).getAttribute('key');
-      event.location = this.rooms.get(roomKey);
+      const roomNode = eventAsXml.getElementsByTagName('room');
+      let roomKey = '';
+      if (roomNode.length > 0) {
+        roomKey = (roomNode[0].firstChild as Element).getAttribute('key');
+        event.location = this.rooms.get(roomKey);
+      } else {
+        event.location = {address: '', name: ''};
+      }
       let description;
       if ((description = eventAsXml.getElementsByTagName('description')).length > 0) {
         event.description = description[0].firstChild.nodeValue.replace(/\n\s*\n\s*\n/g, '\n\n');

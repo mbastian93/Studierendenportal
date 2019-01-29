@@ -42,7 +42,6 @@ export class CanteenComponent implements OnInit {
 
   handleSelect(event: MatOptionSelectionChange) {
     if (!event.isUserInput) {
-      console.log(event);
       return;
     }
     // set the first tab as active by default
