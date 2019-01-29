@@ -21,7 +21,7 @@ export class LibraryIdComponent implements OnInit {
 
   ngOnInit() {
     this.setTitle();
-    // this.libraryIdService.getLibraryId().subscribe( response => this.libraryId = response.own[0]);
+    this.libraryIdService.getLibraryId().subscribe( response => this.libraryId = response.own[0]);
   }
 
   private setTitle() {
