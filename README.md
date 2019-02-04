@@ -2,7 +2,7 @@
 
 Quellcode meiner Bachelorarbeit (vgl. [https://github.com/mbastian93/Studierendenportal-Ausarbeitung-](https://github.com/mbastian93/Studierendenportal-Ausarbeitung-))
 
-# Hinweise
+## Hinweise
 * Authentifizierung umgesetzt mit [angular-oauth2-oidc](https://www.npmjs.com/package/angular-oauth2-oidc)
 * Barcode des Bibliotheksausweises umgesetzt mit [ngx-barcode](https://www.npmjs.com/package/ngx-barcode)
 * Icons von [Material Design Icons](https://materialdesignicons.com/) und [Icons8](https://icons8.de/)
